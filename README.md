@@ -1,1 +1,2 @@
-# CartBuilder
+# Cart Builder
+## Team Members
