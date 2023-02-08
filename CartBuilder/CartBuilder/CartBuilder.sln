@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CartBuilder", "CartBuilder\CartBuilder.csproj", "{0873139D-B2F7-4049-B088-32F3CE148945}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0873139D-B2F7-4049-B088-32F3CE148945}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0873139D-B2F7-4049-B088-32F3CE148945}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0873139D-B2F7-4049-B088-32F3CE148945}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0873139D-B2F7-4049-B088-32F3CE148945}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CBAA49FD-C5E5-44CD-8804-8586A48DB85B}
+	EndGlobalSection
+EndGlobal
