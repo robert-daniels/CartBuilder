@@ -1,0 +1,78 @@
+---
+title: Classes - initial thoughts
+---
+
+classDiagram
+    class Profile{
+    -int profileID
+    -string profileName
+    -string email
+    -LinkedList<Integer> allergies
+    %% Not fully normalized, for speed
+    -LinkedList<Integer> ownRecipies
+    -LinkedList<Integer> favoriteRecipies
+
+    +getSet(int profileID)
+    +getSet(string profileName)
+    +getSet(string email)
+    +addAllergy(int allergyID)
+    +deleteAllergy(int allergyID)
+    +reportAllAllergies()
+    +isAllergic(int allergyID)
+    +addOwnRecipe(int recipeID)
+    +deleteOwnRecipe(int recipe)
+    +reportAllOwnRecipes() 
+    +reportOwnRecipe(int recipeID)
+}
+    class Admin{
+        -int profileID
+        +getSet(int profileID)
+        +isAdmin(int profileID)
+    }
+
+    class Allergy{
+        -int allergyID
+        -string allergyName
+        +getSet(allergyID)
+        +getSet(allergyName)
+    }
+
+    class Recipe{
+        -int recipeID
+        -int profileID
+        -string recipeName
+        -DATE: dateCreated
+        -string: jsonIngredientObject
+        -string: jsonCookingInstructionsObject
+        +getSet(int recipeID)
+        +getSet(int profileID)
+        +getSet(string recipeName)
+        +getSet(DATE dateCreated)
+        +getSet(string jsonIngredientObject)
+        +getSet(string jsonCookingInstructionsObject)
+    }
+
+    class Measurement{
+        -int measurementID
+        -string measurementName
+        +getSet(int measurementID)
+        +getSet(string MeasurementName)
+    }
+
+    class StagingController{
+        -int stagingID
+        -LinkedList<Integer> recipesSelected
+        +getSet(int stagingID)
+        +addRecipe(int recipeID)
+        +deleteRecipe(int recipeID)
+        +reportAllRecipes()
+        +addToCart()
+    }
+
+    class Cart{
+        -int cartID
+        -HashMap<Ingredient Ingredient, int amountUserHas> inventory
+        +HashMap___ALL
+    }
+
+
