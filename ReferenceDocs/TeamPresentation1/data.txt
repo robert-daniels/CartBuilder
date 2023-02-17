@@ -1,0 +1,17 @@
+Project - Cart Builder, placeholder name
+
+Project Overview - The app will contain a database of searchable recipes selected from the Recipe1M JSON dataset. Users will be able to select these recipes and 
+add them to a shopping list staging area. The staging area populates with the ingredients needed for said recipes at their desired serving sizes. User can 
+enter how much of the ingredient they already have, then print out a shopping list of ingredients needed to make their meals. 
+
+Target audience - Any busy individual that does the grocery shopping for their family and needs a quick and painless way to plan their trip to the store. 
+
+Front-end framework - React.js will be used to render the application, enhanced with Bootstrap components. JavaScript will be used to make the xmlhttprequests with the api tier. A color scheme and logo will be decided at a later date. 
+At various points in the project, we will need to use a template engine. This decision is still being researched, but Jinja2 is one of the possibilities. 
+
+
+
+Back-end framework - TODO::
+
+Other: we expect to host the application on the AWS free tier. We have an already established DNS namespace that we can issue a cert for. 
+
