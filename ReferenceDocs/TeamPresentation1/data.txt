@@ -10,8 +10,11 @@ Front-end framework - React.js will be used to render the application, enhanced 
 At various points in the project, we will need to use a template engine. This decision is still being researched, but Jinja2 is one of the possibilities. 
 
 
-
-Back-end framework - TODO::
+Back-end framework - Django could be a good option as a back-end framework for for the Cart Builder project. it has many features and tools that could make it a good fit for the Cart Builder project. Here are some reasons why Django could be a good choice:
+1- Built-in ORM: Django's Object-Relational Mapping (ORM) is a powerful tool that makes it easy to work with databases, such as the one that will store the recipes in the Cart Builder project. 
+2- Scalability: Django is a scalable framework that can handle large amounts of traffic and data.
+3-Robust ecosystem: Django has a large and active community that has developed many plugins and tools that can be used to enhance the functionality of the framework. 
+Overall, Django's rich feature set, scalability, and security features make it a good candidate for a Cart Builder project.
 
 Other: we expect to host the application on the AWS free tier. We have an already established DNS namespace that we can issue a cert for. 
 
