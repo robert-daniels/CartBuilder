@@ -5,9 +5,8 @@ from django.db.models import Count
 # Create your models here.
 class Ingredient(models.Model):
     name = models.CharField(max_length=255)
-    description = models.TextField()
 
-    def __str(self):
+    def __str__(self):
         return {
             self.name,
             self.description,
@@ -20,12 +19,16 @@ class RecipeFavorite(models.Model):
     date_favorited = models.DateTimeField(auto_now_add=True)
 
 
+class CookingInstruction(models.Model):
+    instruction = models.CharField(max_length=255)
+
+
 class Recipe(models.Model):
     recipe_id = models.AutoField(primary_key=True)
     profile_id = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='recipes_owned')
     recipe_name = models.CharField(max_length=255)
     date_created = models.DateField()
-    cooking_instructions = models.TextField()
+    cooking_instructions = models.ManyToManyField(CookingInstruction)
     ingredients = models.ManyToManyField(Ingredient, through='RecipeIngredient')
     favorites = models.ManyToManyField('Profile', through=RecipeFavorite, related_name='favorite_recipes_for')
 
@@ -155,6 +158,15 @@ class MockRecipe(models.Model):
     m_recipe_name = models.CharField(max_length=50)
     m_cooking_instructions = models.ManyToManyField(MockCookingInstruction)
     m_ingredients = models.ManyToManyField(MockIngredient, through='MockRecipeIngredient')
+
+    def get_recipe_name(self):
+        return self.m_recipe_name
+
+    def get_cooking_instructions(self):
+        return self.m_ingredients.all()
+
+    def get_recipe_ingredients(self):
+        return self.m_ingredients.all()
 
 
 class MockRecipeIngredient(models.Model):
