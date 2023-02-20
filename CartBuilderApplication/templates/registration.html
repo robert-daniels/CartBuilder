@@ -1,13 +1,16 @@
 {% extends 'base.html' %}
+{% load static %}
+
+
 
 {% block content %}
 
+<body>
+  {% block form %}{% include "./components/registration_card.html" %}{% endblock %}
+  <br>
 
-    <h2>Create your account!</h2>
+</body>
 
-
-    {% block form %}{% include "./components/registration_form.html" %}{% endblock %}
-    <br>
 
 
 
