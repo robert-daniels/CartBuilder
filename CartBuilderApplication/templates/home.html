@@ -1,7 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Popular Recipes</h2>
+    
+<div class="container">
+
+  <h2>At A Glance: </h2>
+  <div class="d-flex flex-row mb-3">
+    <div class="p-2">{% include "./components/recipe_card.html" %}</div>
+    <div class="p-2">{% include "./components/recipe_card.html" %}</div>
+    <div class="p-2">{% include "./components/recipe_card.html" %}</div>
+  </div>
+
+
+
+
+
     <ul>
         {% for recipe in popular_recipes %}
             <li><a href="{% url 'recipe_detail' recipe.pk %}">{{ recipe.recipe_name }}</a></li>
@@ -9,10 +22,7 @@
             <li>No popular recipes found.</li>
         {% endfor %}
     </ul>
+</div>
 
-   <form method="get" action="{% url 'search_by_recipe' %}">
-       <input type="text" name="query" placeholder="Search for a recipe">
-       <button type="submit">Search</button>
-   </form>
 
 {% endblock %}
