@@ -28,7 +28,7 @@ class Recipe(models.Model):
     profile_id = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='recipes_owned')
     recipe_name = models.CharField(max_length=255)
     date_created = models.DateField()
-    cooking_instructions = models.ManyToManyField(CookingInstruction)
+    cooking_instruction = models.ForeignKey(CookingInstruction, on_delete=models.CASCADE)
     ingredients = models.ManyToManyField(Ingredient, through='RecipeIngredient')
     favorites = models.ManyToManyField('Profile', through=RecipeFavorite, related_name='favorite_recipes_for')
 
