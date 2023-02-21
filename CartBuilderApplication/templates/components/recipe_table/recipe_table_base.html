@@ -1,0 +1,37 @@
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Recipe</th>
+            <th scope="col">Ingredients</th>
+            <th scope="col">Difficulty</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <!-- mock data -->
+        <tr>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+
+        <!-- /mock data -->
+
+        {% for recipe in recipes %}
+        <tr>
+            <td><a href="{% url 'recipe_detail' recipe.pk %}">{{ recipe.recipe_name }}</a></td>
+            <td><a href="{% url 'recipe_detail' recipe.pk %}">{{ recipe.recipe_NER }}</a></td>
+            <td><a href="{% url 'recipe_detail' recipe.pk %}">{{ recipe.recipe_difficulty }}</a></td>
+        </tr>
+        {% empty %}
+        <li>Error loading non-mock recipes.</li>
+        {% endfor %}
+
+    </tbody>
+</table>
+
