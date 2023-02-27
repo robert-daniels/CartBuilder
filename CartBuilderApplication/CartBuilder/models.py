@@ -19,16 +19,12 @@ class RecipeFavorite(models.Model):
     date_favorited = models.DateTimeField(auto_now_add=True)
 
 
-class CookingInstruction(models.Model):
-    instruction = models.CharField(max_length=255)
-
-
 class Recipe(models.Model):
     recipe_id = models.AutoField(primary_key=True)
     profile_id = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='recipes_owned')
-    recipe_name = models.CharField(max_length=255)
+    recipe_name = models.CharField(max_length=100)
     date_created = models.DateField()
-    cooking_instruction = models.ForeignKey(CookingInstruction, on_delete=models.CASCADE)
+    cooking_instruction = models.CharField(max_length=255)
     ingredients = models.ManyToManyField(Ingredient, through='RecipeIngredient')
     favorites = models.ManyToManyField('Profile', through=RecipeFavorite, related_name='favorite_recipes_for')
 
