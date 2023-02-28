@@ -5,7 +5,18 @@
 
 {% block content %}
 
+<style>
+  body {
+    background-image: url("{% static "./assets/other/login_background_mountains.jpg" %}");
+  } 
+
+
+</style>
+
 <body>
+
+
+
   {% block form %}{% include "./components/registration_card.html" %}{% endblock %}
   <br>
 
