@@ -21,7 +21,6 @@ class Recipe(models.Model):
     profile_id = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='recipes_owned')
     recipe_name = models.CharField(max_length=100)
     date_created = models.DateField()
-    cooking_instruction = models.CharField(max_length=255)
     ingredients = models.ManyToManyField(Ingredient, through='RecipeIngredient')
     favorites = models.ManyToManyField('Profile', through=RecipeFavorite, related_name='favorite_recipes_for')
 
@@ -134,7 +133,6 @@ class RecipeIngredient(models.Model):
 
 
 class MockIngredient(models.Model):
-    m_ingredient_id = models.AutoField(primary_key=True)
     m_ingredient_name = models.CharField(max_length=50)
 
     def __str__(self):
@@ -142,14 +140,13 @@ class MockIngredient(models.Model):
 
 
 class MockAllergicIngredient(models.Model):
-    m_allergic_ingredient_id = models.AutoField(primary_key=True)
     m_allergic_ingredient = models.CharField(max_length=50)
 
 
 class MockRecipe(models.Model):
     m_recipe_name = models.CharField(max_length=50)
-    m_allergic_ingredients = models.ForeignKey(MockAllergicIngredient, on_delete=models.CASCADE)
-    m_ingredients = models.ForeignKey(MockIngredient, on_delete=models.CASCADE)
+    m_allergic_ingredients = models.ManyToManyField(MockAllergicIngredient)
+    m_ingredients = models.ManyToManyField(MockIngredient)
 
     def get_recipe_name(self):
         return self.m_recipe_name
