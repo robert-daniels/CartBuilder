@@ -164,8 +164,9 @@ class MockRecipe(models.Model):
 
 
 class TopTenMockAllergicIngredients(models.Model):
-    allergic_ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    allergic_ingredient = models.ForeignKey(MockAllergicIngredient, on_delete=models.CASCADE)
     count = models.IntegerField()
+    rank = models.IntegerField()
 
     def __str__(self):
-        return f"{self.allergic_ingredient.name}: {self.count}"
+        return f"{self.allergic_ingredient.m_allergic_ingredient}: {self.count}"

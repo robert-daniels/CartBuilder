@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 from collections import Counter
-from ...models import MockRecipe, TopTenMockAllergicIngredients
+from ...models import MockRecipe, MockAllergicIngredient, TopTenMockAllergicIngredients
 
 
 class Command(BaseCommand):
@@ -8,24 +8,38 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # Get all recipe ingredients (could be more optimized but hey... it's running once)
-        all_allergic_ingredients = MockRecipe.objects.all()
+        all_recipes = MockRecipe.objects.all()
 
-        # Get count (cumulative) of each ingredient in all m_allergic_ingredients
-        ingredient_counts = Counter(ri.m_allergic_ingredients for ri in all_allergic_ingredients)
+        # Get count (cumulative) of each ingredient in all recipes
+        ingredient_counts = Counter()
+        for recipe in all_recipes:
+            for ingredient in recipe.m_allergic_ingredients.all():
+                ingredient_counts[ingredient.m_allergic_ingredient] += 1
 
         # Get top 10 allergic ingredients from Mock db
         top_allergic_ingredients = ingredient_counts.most_common(10)
 
         # Save to TopTenMockAllergicIngredients db
         for i, (ingredient_name, count) in enumerate(top_allergic_ingredients, start=1):
-            top_allergic_ingredient, created = TopTenMockAllergicIngredients.objects.update_or_create(
-                allergic_ingredient=ingredient_name,
+            # Check if the ingredient exists in the database
+            try:
+                allergic_ingredient = MockAllergicIngredient.objects.get(m_allergic_ingredient=ingredient_name)
+            except MockAllergicIngredient.DoesNotExist:
+                continue
+
+            # Check if the record already exists in the database
+            top_allergic_ingredient, created = TopTenMockAllergicIngredients.objects.get_or_create(
+                allergic_ingredient=allergic_ingredient,
                 defaults={
+                    'rank': i,
                     'count': count,
                 }
             )
-            print(f"Allergic Ingredient: {top_allergic_ingredient.allergic_ingredient}")
+
+            print(f"Allergic Ingredient: {top_allergic_ingredient.allergic_ingredient.m_allergic_ingredient}")
             print(f"\tRank: #rank={top_allergic_ingredient.rank}")
             print(f"\tCount: count={top_allergic_ingredient.count}")
-            if created:
+
+            if not created:
+                top_allergic_ingredient.count = count
                 top_allergic_ingredient.save()
