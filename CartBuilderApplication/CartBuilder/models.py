@@ -16,12 +16,17 @@ class RecipeFavorite(models.Model):
     date_favorited = models.DateTimeField(auto_now_add=True)
 
 
+class AllergicIngredient(models.Model):
+    ingredient_name = models.CharField(max_length=50)
+
+
 class Recipe(models.Model):
     recipe_id = models.AutoField(primary_key=True)
     profile_id = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='recipes_owned')
     recipe_name = models.CharField(max_length=100)
     date_created = models.DateField()
     ingredients = models.ManyToManyField(Ingredient, through='RecipeIngredient')
+    allergic_ingredients = models.ManyToManyField(AllergicIngredient)
     favorites = models.ManyToManyField('Profile', through=RecipeFavorite, related_name='favorite_recipes_for')
 
     def __str__(self):
@@ -148,5 +153,19 @@ class MockRecipe(models.Model):
     m_allergic_ingredients = models.ManyToManyField(MockAllergicIngredient)
     m_ingredients = models.ManyToManyField(MockIngredient)
 
-    def get_recipe_name(self):
+    def get_mock_recipe_name(self):
         return self.m_recipe_name
+
+    def get_mock_allergies_for_recipe(self):
+        return self.m_allergic_ingredients.all()
+
+    def get_mock_ingredients(self):
+        return self.m_ingredients.all()
+
+
+class TopTenMockAllergicIngredients(models.Model):
+    allergic_ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    count = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.allergic_ingredient.name}: {self.count}"
