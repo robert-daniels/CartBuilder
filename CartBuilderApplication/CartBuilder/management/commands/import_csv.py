@@ -1,7 +1,7 @@
 import csv
 import os
 from django.core.management.base import BaseCommand
-from CartBuilder.models import MockIngredient, MockRecipe, MockRecipeIngredient, MockCookingInstruction
+from CartBuilderApplication.CartBuilder.models import MockIngredient, MockRecipe
 
 
 class Command(BaseCommand):
@@ -22,13 +22,6 @@ class Command(BaseCommand):
                 recipe_name = row[1]
                 print("Recipe Name: ", recipe_name)
 
-                cooking_instructions = row[3].split(', ')
-                formatted_instructions = []
-                for instruction in cooking_instructions:
-                    formatted_instructions.append(
-                        MockCookingInstruction.objects.create(m_cooking_instruction=instruction)
-                    )
-
                 # Create a new recipe object
                 recipe = MockRecipe.objects.create(m_recipe_name=recipe_name)
 
@@ -45,8 +38,18 @@ class Command(BaseCommand):
 
                 print('\n')
 
-                # associate the recipe with the cooking instructions
-                recipe.m_cooking_instructions.set(formatted_instructions)
+                allergic_ingredients = row[6].split(', ')
+                for allergic_ingredient in allergic_ingredients:
+
+                    # Check if the ingredient already exists in the database
+                    _allergic_ingredient, _ = MockIngredient.objects.get_or_create(
+                        m_allergic_ingredient=allergic_ingredient
+                    )
+
+                    # Add each allergic_ingredient to the recipe
+                    recipe.m_ingredients.add(allergic_ingredient)
+
+                    print(allergic_ingredient)
 
                 # save m_recipe_name & m_ingredients to db:
                 recipe.save()

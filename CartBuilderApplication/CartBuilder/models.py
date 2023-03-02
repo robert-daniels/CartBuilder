@@ -7,10 +7,7 @@ class Ingredient(models.Model):
     name = models.CharField(max_length=255)
 
     def __str__(self):
-        return {
-            self.name,
-            self.description,
-        }
+        return self.name
 
 
 class RecipeFavorite(models.Model):
@@ -137,34 +134,22 @@ class RecipeIngredient(models.Model):
 
 
 class MockIngredient(models.Model):
+    m_ingredient_id = models.AutoField(primary_key=True)
     m_ingredient_name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.m_ingredient_name
 
 
-class MockCookingInstruction(models.Model):
-    m_cooking_instruction = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.m_cooking_instruction
+class MockAllergicIngredient(models.Model):
+    m_allergic_ingredient_id = models.AutoField(primary_key=True)
+    m_allergic_ingredient = models.CharField(max_length=50)
 
 
 class MockRecipe(models.Model):
     m_recipe_name = models.CharField(max_length=50)
-    m_cooking_instructions = models.ManyToManyField(MockCookingInstruction)
-    m_ingredients = models.ManyToManyField(MockIngredient, through='MockRecipeIngredient')
+    m_allergic_ingredients = models.ForeignKey(MockAllergicIngredient, on_delete=models.CASCADE)
+    m_ingredients = models.ForeignKey(MockIngredient, on_delete=models.CASCADE)
 
     def get_recipe_name(self):
         return self.m_recipe_name
-
-    def get_cooking_instructions(self):
-        return self.m_ingredients.all()
-
-    def get_recipe_ingredients(self):
-        return self.m_ingredients.all()
-
-
-class MockRecipeIngredient(models.Model):
-    m_recipe = models.ForeignKey(MockRecipe, on_delete=models.CASCADE)
-    m_ingredient = models.ForeignKey(MockIngredient, on_delete=models.CASCADE)
