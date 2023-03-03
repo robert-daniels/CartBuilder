@@ -11,9 +11,12 @@ class Ingredient(models.Model):
 
 
 class RecipeFavorite(models.Model):
-    profile = models.ForeignKey('Profile', on_delete=models.CASCADE)
+    profile = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='favorite_recipes_profile')
     recipe = models.ForeignKey('Recipe', on_delete=models.CASCADE)
     date_favorited = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('profile', 'recipe')
 
 
 class AllergicIngredient(models.Model):
@@ -27,7 +30,7 @@ class Recipe(models.Model):
     date_created = models.DateField()
     ingredients = models.ManyToManyField(Ingredient, through='RecipeIngredient')
     allergic_ingredients = models.ManyToManyField(AllergicIngredient)
-    favorites = models.ManyToManyField('Profile', through=RecipeFavorite, related_name='favorite_recipes_for')
+    favorite_recipes = models.ManyToManyField('Profile', through='RecipeFavorite', related_name='recipes_favorited')
 
     def __str__(self):
         _ingredients = [self.ingredients.name for _ingredient in self.ingredients.all()]
