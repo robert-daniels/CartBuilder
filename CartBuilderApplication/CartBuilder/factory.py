@@ -84,9 +84,8 @@ class ProfileFactory(factory.django.DjangoModelFactory):
     profile_first_name = factory.Faker('first_name')
     profile_last_name = factory.Faker('last_name')
 
-    @factory.lazy_attribute
-    def add_allergies(self):
-        return random.random() < 0.1
+    def __init__(self):
+        self.add_allergies = random.random() < 0.1
 
     @factory.post_generation
     def allergies(self, create, extracted):
