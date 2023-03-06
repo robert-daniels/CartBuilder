@@ -10,9 +10,14 @@ class Ingredient(models.Model):
         return self.name
 
 
+class RecipePersonal(models.Model):
+    profile = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='personal_recipe_relations')
+    recipe = models.ForeignKey('Recipe', on_delete=models.CASCADE, related_name='profiles_with_personal_recipe')
+
+
 class RecipeFavorite(models.Model):
     profile = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='favorite_recipes_profile')
-    recipe = models.ForeignKey('Recipe', on_delete=models.CASCADE)
+    recipe = models.ForeignKey('Recipe', on_delete=models.CASCADE, related_name='profiles_with_favorite_recipe')
     date_favorited = models.DateTimeField(auto_now_add=True)
 
     class Meta:

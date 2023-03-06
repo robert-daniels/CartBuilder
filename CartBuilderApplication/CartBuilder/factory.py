@@ -10,12 +10,12 @@ class AllergyFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Allergy
 
-        @factory.lazy_attribute
-        def allergy_name(self):
-            top_ten_allergic_ingredients = TopTenMockAllergicIngredients.objects.all()
-            if top_ten_allergic_ingredients:
-                random_allergic_ingredient = random.choice(top_ten_allergic_ingredients)
-                return random_allergic_ingredient.allergic_ingredient.m_allergic_ingredient
+    @factory.lazy_attribute
+    def allergy_name(self):
+        top_ten_allergic_ingredients = TopTenMockAllergicIngredients.objects.all()
+        if top_ten_allergic_ingredients:
+            random_allergic_ingredient = random.choice(top_ten_allergic_ingredients)
+            return random_allergic_ingredient.allergic_ingredient.m_allergic_ingredient
 
 
 class RecipeFactory(factory.django.DjangoModelFactory):
@@ -55,9 +55,18 @@ class RecipeFactory(factory.django.DjangoModelFactory):
             for allergic_ingredient in allergic_ingredients:
                 self.allergic_ingredients.add(allergic_ingredient)
 
-    def add_allergic_ingredients(self):
-        allergic_ingredients = MockAllergicIngredient.objects.order_by('?')[:3]
-        self.allergic_ingredients.add(*allergic_ingredients)
+    @factory.post_generation
+    def allergic_ingredients(self, create, extracted):
+        if not create:
+            return
+
+        if extracted:
+            for allergic_ingredient in extracted:
+                self.allergic_ingredients.add(allergic_ingredient)
+        else:
+            allergic_ingredients = MockAllergicIngredient.objects.order_by('?')[:3]  # Get 3 random allergic ingredients
+            for allergic_ingredient in allergic_ingredients:
+                self.allergic_ingredients.add(allergic_ingredient)
 
     @classmethod
     def _create(cls, model_class, *args, **kwargs):
@@ -84,9 +93,6 @@ class ProfileFactory(factory.django.DjangoModelFactory):
     profile_first_name = factory.Faker('first_name')
     profile_last_name = factory.Faker('last_name')
 
-    def __init__(self):
-        self.add_allergies = random.random() < 0.1
-
     @factory.post_generation
     def allergies(self, create, extracted):
         if not create:
@@ -94,7 +100,7 @@ class ProfileFactory(factory.django.DjangoModelFactory):
 
         if extracted:
             allergies = list(set(extracted))  # Remove duplicates
-        elif self.add_allergies:
+        elif random.random() > 0.1:
             allergies = [AllergyFactory() for _ in range(3)]
         else:
             allergies = []
@@ -126,27 +132,21 @@ class ProfileFactory(factory.django.DjangoModelFactory):
                     # Handle the validation error gracefully
                     print(f"Error saving recipe: {e}")
 
-    @factory.post_generation
-    def favorite_recipes(self, create, extracted, num_people=100, max_favorites=3):
+    @classmethod
+    def favorite_recipes(cls, profile, create=True, num_people=100, max_favorites=3):
         if not create:
-            return
-        if extracted:
-            # If a list of recipes was provided, add them to the profile's favorites
-            favorites = [RecipeFavorite(profile=self, recipe=recipe) for recipe in extracted]
-            RecipeFavorite.objects.bulk_create(favorites)
-        else:
-            # Choose a random set of profiles
-            profiles = Profile.objects.order_by('?')[:num_people]
+            return []
 
-            # Choose a random set of favorite recipes for each profile
-            favorites = []
-            for profile in profiles:
-                recipes = Recipe.objects.filter(profile_id=profile).order_by('?')[:max_favorites]
-                favorites += [RecipeFavorite(profile=self, recipe=recipe) for recipe in recipes]
+        if not profile.id:
+            profile.save()
 
-            # Save all the favorite recipes at once
-            try:
-                RecipeFavorite.objects.bulk_create(favorites)
-            except IntegrityError as e:
-                # Handle the integrity error gracefully
-                print(f"Error saving favorite recipes: {e}")
+        # Choose a random set of profiles
+        profiles = Profile.objects.exclude(id=profile.id).order_by('?')[:num_people]
+
+        # Choose a random set of favorite recipes for each profile
+        favorites = []
+        for p in profiles:
+            recipes = Recipe.objects.filter(profile_id=p).order_by('?')[:max_favorites]
+            favorites += [RecipeFavorite(profile=profile, recipe=r) for r in recipes]
+
+        return favorites
