@@ -7,16 +7,20 @@ class Ingredient(models.Model):
     name = models.CharField(max_length=255)
 
     def __str__(self):
-        return {
-            self.name,
-            self.description,
-        }
+        return self.name
 
 
 class RecipeFavorite(models.Model):
-    profile = models.ForeignKey('Profile', on_delete=models.CASCADE)
+    profile = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='favorite_recipes_profile')
     recipe = models.ForeignKey('Recipe', on_delete=models.CASCADE)
     date_favorited = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('profile', 'recipe')
+
+
+class AllergicIngredient(models.Model):
+    ingredient_name = models.CharField(max_length=50)
 
 
 class Recipe(models.Model):
@@ -24,9 +28,9 @@ class Recipe(models.Model):
     profile_id = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='recipes_owned')
     recipe_name = models.CharField(max_length=100)
     date_created = models.DateField()
-    cooking_instruction = models.CharField(max_length=255)
     ingredients = models.ManyToManyField(Ingredient, through='RecipeIngredient')
-    favorites = models.ManyToManyField('Profile', through=RecipeFavorite, related_name='favorite_recipes_for')
+    allergic_ingredients = models.ManyToManyField(AllergicIngredient)
+    favorite_recipes = models.ManyToManyField('Profile', through='RecipeFavorite', related_name='recipes_favorited')
 
     def __str__(self):
         _ingredients = [self.ingredients.name for _ingredient in self.ingredients.all()]
@@ -143,28 +147,29 @@ class MockIngredient(models.Model):
         return self.m_ingredient_name
 
 
-class MockCookingInstruction(models.Model):
-    m_cooking_instruction = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.m_cooking_instruction
+class MockAllergicIngredient(models.Model):
+    m_allergic_ingredient = models.CharField(max_length=50)
 
 
 class MockRecipe(models.Model):
     m_recipe_name = models.CharField(max_length=50)
-    m_cooking_instructions = models.ManyToManyField(MockCookingInstruction)
-    m_ingredients = models.ManyToManyField(MockIngredient, through='MockRecipeIngredient')
+    m_allergic_ingredients = models.ManyToManyField(MockAllergicIngredient)
+    m_ingredients = models.ManyToManyField(MockIngredient)
 
-    def get_recipe_name(self):
+    def get_mock_recipe_name(self):
         return self.m_recipe_name
 
-    def get_cooking_instructions(self):
+    def get_mock_allergies_for_recipe(self):
+        return self.m_allergic_ingredients.all()
+
+    def get_mock_ingredients(self):
         return self.m_ingredients.all()
 
-    def get_recipe_ingredients(self):
-        return self.m_ingredients.all()
 
+class TopTenMockAllergicIngredients(models.Model):
+    allergic_ingredient = models.ForeignKey(MockAllergicIngredient, on_delete=models.CASCADE)
+    count = models.IntegerField()
+    rank = models.IntegerField()
 
-class MockRecipeIngredient(models.Model):
-    m_recipe = models.ForeignKey(MockRecipe, on_delete=models.CASCADE)
-    m_ingredient = models.ForeignKey(MockIngredient, on_delete=models.CASCADE)
+    def __str__(self):
+        return f"{self.allergic_ingredient.m_allergic_ingredient}: {self.count}"

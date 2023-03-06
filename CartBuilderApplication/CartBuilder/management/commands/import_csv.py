@@ -1,7 +1,7 @@
 import csv
 import os
 from django.core.management.base import BaseCommand
-from CartBuilder.models import MockIngredient, MockRecipe, MockRecipeIngredient, MockCookingInstruction
+from ...models import MockRecipe, MockIngredient, MockAllergicIngredient
 
 
 class Command(BaseCommand):
@@ -15,40 +15,38 @@ class Command(BaseCommand):
             for row in reader:
                 print('-----')
 
-                # strip newline characters, double quotes ,and brackets from csv
+                # strip newline characters, double quotes, and brackets from csv
                 row = [cell.replace('\n', '').replace('[', '').replace(']', '').replace('"', '') for cell in row]
                 print('\n')
 
                 recipe_name = row[1]
                 print("Recipe Name: ", recipe_name)
 
-                cooking_instructions = row[3].split(', ')
-                formatted_instructions = []
-                for instruction in cooking_instructions:
-                    formatted_instructions.append(
-                        MockCookingInstruction.objects.create(m_cooking_instruction=instruction)
-                    )
-
                 # Create a new recipe object
                 recipe = MockRecipe.objects.create(m_recipe_name=recipe_name)
 
-                ingredient_list = row[2].split(', ')
+                ingredient_names = row[2].split(', ')
 
-                for ingredient in ingredient_list:
-                    # Check if the ingredient already exists in the database
-                    _ingredient, created = MockIngredient.objects.get_or_create(m_ingredient_name=ingredient)
+                for ingredient_name in ingredient_names:
+                    ingredient, created = MockIngredient.objects.get_or_create(
+                        m_ingredient_name=ingredient_name
+                    )
+                    recipe.m_ingredients.add(ingredient)
 
-                    # Add the ingredient to the recipe
-                    recipe.m_ingredients.add(_ingredient)
-
-                    print("Ingredient: ", ingredient)
+                    print("Ingredient: ", ingredient_name)
 
                 print('\n')
 
-                # associate the recipe with the cooking instructions
-                recipe.m_cooking_instructions.set(formatted_instructions)
+                allergic_ingredient_names = row[6].split(', ')
+                for allergic_ingredient_name in allergic_ingredient_names:
+                    allergic_ingredient, created = MockAllergicIngredient.objects.get_or_create(
+                        m_allergic_ingredient=allergic_ingredient_name
+                    )
+                    recipe.m_allergic_ingredients.add(allergic_ingredient)
 
-                # save m_recipe_name & m_ingredients to db:
+                    print(allergic_ingredient_name)
+
+                # save recipe to db:
                 recipe.save()
 
                 print('\n')
