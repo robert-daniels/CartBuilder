@@ -55,19 +55,6 @@ class RecipeFactory(factory.django.DjangoModelFactory):
             for allergic_ingredient in allergic_ingredients:
                 self.allergic_ingredients.add(allergic_ingredient)
 
-    @factory.post_generation
-    def allergic_ingredients(self, create, extracted):
-        if not create:
-            return
-
-        if extracted:
-            for allergic_ingredient in extracted:
-                self.allergic_ingredients.add(allergic_ingredient)
-        else:
-            allergic_ingredients = MockAllergicIngredient.objects.order_by('?')[:3]  # Get 3 random allergic ingredients
-            for allergic_ingredient in allergic_ingredients:
-                self.allergic_ingredients.add(allergic_ingredient)
-
     @classmethod
     def _create(cls, model_class, *args, **kwargs):
         # Override the default _create method to create the RecipeIngredient objects
