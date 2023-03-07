@@ -68,7 +68,7 @@ class Allergy(models.Model):
 
 
 class Profile(models.Model):
-    profile_id = models.IntegerField(primary_key=True)
+    profile_id = models.AutoField(primary_key=True)
     profile_first_name = models.CharField(max_length=50)
     profile_last_name = models.CharField(max_length=50)
     allergies = models.ManyToManyField(Allergy, related_name='profiles')
