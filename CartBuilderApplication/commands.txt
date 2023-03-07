@@ -1,2 +1,6 @@
 git checkout -b ryan-branch
 git status
+
+git add . 
+git commit -m "put git commit message here"
+git push origin ryan-branch
