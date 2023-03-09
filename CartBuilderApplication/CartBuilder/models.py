@@ -171,6 +171,9 @@ class MockIngredient(models.Model):
 class MockAllergicIngredient(models.Model):
     m_allergic_ingredient = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.m_allergic_ingredient
+
 
 class MockRecipe(models.Model):
     m_recipe_name = models.CharField(max_length=50)
@@ -188,9 +191,9 @@ class MockRecipe(models.Model):
 
 
 class TopTenMockAllergicIngredients(models.Model):
-    allergic_ingredient = models.ForeignKey(MockAllergicIngredient, on_delete=models.CASCADE)
+    allergic_ingredient = models.CharField(max_length=50)
     count = models.IntegerField()
     rank = models.IntegerField()
 
     def __str__(self):
-        return f"{self.allergic_ingredient.m_allergic_ingredient}: {self.count}"
+        return f"{self.allergic_ingredient}: {self.count}"

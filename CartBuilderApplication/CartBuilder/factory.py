@@ -17,7 +17,7 @@ class AllergyFactory(factory.django.DjangoModelFactory):
         top_ten_allergic_ingredients = TopTenMockAllergicIngredients.objects.all()
         if top_ten_allergic_ingredients:
             random_allergic_ingredient = random.choice(top_ten_allergic_ingredients)
-            return random_allergic_ingredient.allergic_ingredient.m_allergic_ingredient
+            return random_allergic_ingredient.allergic_ingredient
 
 
 class ProfileFactory(factory.django.DjangoModelFactory):
