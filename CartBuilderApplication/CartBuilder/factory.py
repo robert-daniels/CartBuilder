@@ -35,15 +35,9 @@ class ProfileFactory(factory.django.DjangoModelFactory):
             return
 
         if extracted:
-            allergies = list(set(extracted))  # Remove duplicates
+            pass
         elif random.random() > 0.1:
             allergies = [AllergyFactory() for _ in range(3)]
-        else:
-            allergies = []
-
-        for allergy in allergies:
-            if allergy not in self.allergies.all():
-                self.allergies.add(allergy)
 
     @factory.post_generation
     def personal_recipes(self, create, extracted):
