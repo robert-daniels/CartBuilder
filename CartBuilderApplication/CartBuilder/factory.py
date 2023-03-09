@@ -74,21 +74,20 @@ class ProfileFactory(factory.django.DjangoModelFactory):
                     print(f"Error saving recipe: {e}")
 
     @classmethod
-    def favorite_recipes(cls, profile, create=True, num_people=100, max_favorites=3):
+    def favorite_recipes(cls, profile, create=True, num_people=10, max_favorites=3):
         if not create:
             return []
 
-        if not profile.id:
-            profile.save()
-
         # Choose a random set of profiles
-        profiles = Profile.objects.exclude(id=profile.id).order_by('?')[:num_people]
+        profiles = Profile.objects.exclude(pk=profile.pk).order_by('?')[:num_people]
 
         # Choose a random set of favorite recipes for each profile
         favorites = []
         for p in profiles:
             recipes = Recipe.objects.filter(profile=p).order_by('?')[:max_favorites]
-            favorites += [RecipeFavorite(profile=profile, recipe=r) for r in recipes]
+            for recipe in recipes:
+                if recipe not in favorites:
+                    favorites.append(recipe)
 
         return favorites
 
@@ -171,10 +170,16 @@ class RecipeFactory(factory.django.DjangoModelFactory):
             date_created=fake.date()
         )
         for mock_ingredient in mock_recipe.m_ingredients.all():
-            ingredient, _ = Ingredient.objects.get_or_create(name=mock_ingredient.m_ingredient_name)
+            ingredient, _ = Ingredient.objects.get_or_create(
+                name=mock_ingredient.m_ingredient_name
+            )
             RecipeIngredient.objects.create(recipe=recipe, ingredient=ingredient)
             recipe.ingredients.add(ingredient)
+
         for allergic_ingredient in mock_recipe.m_allergic_ingredients.all():
-            allergic_ingredient, _ = AllergicIngredient.objects.get_or_create(ingredient_name=allergic_ingredient.m_allergic_ingredient)
+            allergic_ingredient, _ = AllergicIngredient.objects.get_or_create(
+                ingredient_name=allergic_ingredient.m_allergic_ingredient
+            )
             recipe.allergic_ingredients.add(allergic_ingredient)
+
         return recipe

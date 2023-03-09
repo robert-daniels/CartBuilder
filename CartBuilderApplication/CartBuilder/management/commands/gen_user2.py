@@ -15,8 +15,19 @@ class Command(BaseCommand):
         # create a profile object with ProfileFactory
         profile = ProfileFactory()
 
+        # generate favorite recipes for profile
+        favorites = ProfileFactory.favorite_recipes(profile)
+
         # create recipes with RecipeFactory and pass the profile object
         for i in range(num_recipes):
             recipe = RecipeFactory.create_recipe(profile)
             self.stdout.write(self.style.SUCCESS(f'Recipe "{recipe.recipe_name}" created successfully.'))
 
+        # Set the favorite_recipes field on the profile instance
+        profile.favorite_recipes.set(favorites)
+        profile.save()
+
+        # Output success message for each favorite recipe
+        for favorite in favorites:
+            self.stdout.write(self.style.SUCCESS(
+                f'Favorite recipe "{favorite.recipe_name}" added to profile "{favorite.profile.profile_first_name}" successfully.'))
