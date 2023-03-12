@@ -124,7 +124,8 @@ class RecipeFactory(factory.django.DjangoModelFactory):
             allergic_ingredients = MockAllergicIngredient.objects.order_by('?')[:3]  # Get 3 random allergic ingredients
             for allergic_ingredient in allergic_ingredients:
                 allergic_ingredient_instance, created = AllergicIngredient.objects.get_or_create(
-                    ingredient_name=allergic_ingredient.m_allergic_ingredient)
+                    ingredient_name=allergic_ingredient.m_allergic_ingredient
+                )
                 self.allergic_ingredients.add(allergic_ingredient_instance)
 
     @classmethod
@@ -161,8 +162,9 @@ class RecipeFactory(factory.django.DjangoModelFactory):
         recipe = Recipe.objects.create(
             profile=profile,
             recipe_name=mock_recipe.m_recipe_name,
-            date_created=fake.date()
+            date_created=fake.date(),
         )
+
         for mock_ingredient in mock_recipe.m_ingredients.all():
             ingredient, _ = Ingredient.objects.get_or_create(
                 name=mock_ingredient.m_ingredient_name

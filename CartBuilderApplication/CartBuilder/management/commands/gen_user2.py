@@ -20,10 +20,10 @@ class Command(BaseCommand):
         profile.allergies.add(allergy)
         profile.save()
 
-
         # Output success message for allergy
         self.stdout.write(self.style.SUCCESS(
-            f'Allergy: "{allergy.allergy_name}" added to profile "{profile.profile_first_name}" successfully.'))
+            f'Allergy: "{allergy.allergy_name}" added to profile "{profile.profile_first_name}" successfully.'
+        ))
 
         # generate favorite recipes for profile
         favorites = ProfileFactory.favorite_recipes(profile)
@@ -32,7 +32,8 @@ class Command(BaseCommand):
         for i in range(num_recipes):
             recipe = RecipeFactory.create_recipe(profile)
             self.stdout.write(self.style.SUCCESS(
-                f'Recipe: "{recipe.recipe_name}" created successfully for profile {profile.profile_first_name}'))
+                f'Recipe: "{recipe.recipe_name}" created successfully for profile {profile.profile_first_name}'
+            ))
 
         # Set the favorite_recipes field on the profile instance
         profile.favorite_recipes.set(favorites)
@@ -42,4 +43,5 @@ class Command(BaseCommand):
         for favorite in favorites:
             self.stdout.write(self.style.SUCCESS(
                 f'Favorite Recipe: "{favorite.recipe_name}" added by "{favorite.profile.profile_first_name}" was '
-                f'successfully added to {profile.profile_first_name}s Favorites'))
+                f'successfully added to {profile.profile_first_name}s Favorites'
+            ))
