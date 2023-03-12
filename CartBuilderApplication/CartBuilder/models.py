@@ -10,9 +10,14 @@ class Ingredient(models.Model):
         return self.name
 
 
+class RecipePersonal(models.Model):
+    profile = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='personal_recipe_relations')
+    recipe = models.ForeignKey('Recipe', on_delete=models.CASCADE, related_name='profiles_with_personal_recipe')
+
+
 class RecipeFavorite(models.Model):
     profile = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='favorite_recipes_profile')
-    recipe = models.ForeignKey('Recipe', on_delete=models.CASCADE)
+    recipe = models.ForeignKey('Recipe', on_delete=models.CASCADE, related_name='profiles_with_favorite_recipe')
     date_favorited = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -25,7 +30,7 @@ class AllergicIngredient(models.Model):
 
 class Recipe(models.Model):
     recipe_id = models.AutoField(primary_key=True)
-    profile_id = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='recipes_owned')
+    profile = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='recipes_owned')
     recipe_name = models.CharField(max_length=100)
     date_created = models.DateField()
     ingredients = models.ManyToManyField(Ingredient, through='RecipeIngredient')
@@ -36,6 +41,22 @@ class Recipe(models.Model):
         _ingredients = [self.ingredients.name for _ingredient in self.ingredients.all()]
         ingredients_list = ", ".join(_ingredients)
         return f"{self.recipe_name}: ({ingredients_list})"
+
+    def add_allergic_ingredients(self):
+        # Get the MockAllergicIngredient instances for the current recipe
+        mock_recipe = MockRecipe.objects.filter(m_recipe_name=self.recipe_name).first()
+        mock_allergic_ingredients = mock_recipe.m_allergic_ingredients.all()
+
+        # Create new AllergicIngredient instances from the MockAllergicIngredient instances
+        allergic_ingredients = []
+        for mock_allergic_ingredient in mock_allergic_ingredients:
+            allergic_ingredient, created = AllergicIngredient.objects.get_or_create(
+                ingredient_name=mock_allergic_ingredient.m_allergic_ingredient
+            )
+            allergic_ingredients.append(allergic_ingredient)
+
+        # Associate the AllergicIngredient instances with the current recipe
+        self.allergic_ingredients.add(*allergic_ingredients)
 
     @classmethod
     def get_popular_recipes(cls, num_recipes=10):
@@ -63,7 +84,7 @@ class Allergy(models.Model):
 
 
 class Profile(models.Model):
-    profile_id = models.IntegerField(primary_key=True)
+    profile_id = models.AutoField(primary_key=True)
     profile_first_name = models.CharField(max_length=50)
     profile_last_name = models.CharField(max_length=50)
     allergies = models.ManyToManyField(Allergy, related_name='profiles')
@@ -150,6 +171,9 @@ class MockIngredient(models.Model):
 class MockAllergicIngredient(models.Model):
     m_allergic_ingredient = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.m_allergic_ingredient
+
 
 class MockRecipe(models.Model):
     m_recipe_name = models.CharField(max_length=50)
@@ -167,9 +191,9 @@ class MockRecipe(models.Model):
 
 
 class TopTenMockAllergicIngredients(models.Model):
-    allergic_ingredient = models.ForeignKey(MockAllergicIngredient, on_delete=models.CASCADE)
+    allergic_ingredient = models.CharField(max_length=50)
     count = models.IntegerField()
     rank = models.IntegerField()
 
     def __str__(self):
-        return f"{self.allergic_ingredient.m_allergic_ingredient}: {self.count}"
+        return f"{self.allergic_ingredient}: {self.count}"
