@@ -1,5 +1,69 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Allergy Page</h2>
+    
+<section style="background-color: #eee;">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col">
+          <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+            <ol class="breadcrumb mb-0">
+              <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-lg-4">
+
+          <!-- Avatar card to be displayed pulically -->
+
+          {% include "./components/profile_page/avatar_card.html" %}
+
+          <!-- Fun flavor text from database  -->
+
+          {% include "./components/profile_page/fun_facts_card.html" %}
+
+        </div>
+        <div class="col-lg-8">
+
+          <!-- Actual identifying profile information, pending an edit query -->
+
+          {% include "./components/profile_page/user_info_card.html" %}
+
+
+          <br>
+          <br>
+
+          <div class="row">
+            <div class="col-md-6">
+
+
+              <!-- Recipe History : Populate from query  -->
+
+              {% include "./components/profile_page/recipe_history_card.html" %}
+
+
+            </div>
+            <div class="col-md-6">
+
+              <!-- Profiles following: Stretch goal in case it's needed -->
+
+              {% include "./components/profile_page/following_profile_card.html" %}
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
 {% endblock %}

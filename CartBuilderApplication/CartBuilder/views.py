@@ -35,6 +35,11 @@ def recipes(request):
     return render(request, 'recipes.html')
 
 
+# Not yet implemented
+def recipe(request):
+    return render(request, 'recipe.html')
+
+
 def ingredients(request):
     return render(request, 'ingredients.html')
 
@@ -42,6 +47,11 @@ def ingredients(request):
 def allergies(request):
     return render(request, 'allergies.html')
 
-
 def profile(request):
     return render(request, 'profile.html')
+
+def login(request):
+    return render(request, 'login.html')
+
+def registration(request):
+    return render(request, 'registration.html')
