@@ -1,0 +1,680 @@
+0,Alfalfa Honey
+1,All-Purpose
+2,Allspice
+3,Almond
+4,Almond Extract
+5,Almond Flavoring
+6,Almonds
+7,Alum
+8,American Cheese
+9,Anchovies
+10,Angel
+11,Apple
+12,Apple Cider Vinegar
+13,Apple Jelly
+14,Apple Juice
+15,Apple Pie Spice
+16,Apple Vinegar
+17,Apples
+18,Applesauce
+19,Apricot Jello
+20,Apricot Nectar
+21,Apricot Preserves
+22,Arborio
+23,Armour Dried Beef
+24,Artichokes
+25,Baby Food
+26,Bacon
+27,Bacon Bits
+28,Bacon Drippings
+29,Bacon Fat
+30,Baking Chocolate
+31,Baking Potatoes
+32,Baking Powder
+33,Baking Soda
+34,Bamboo Shoots
+35,Banana
+36,Bananas
+37,Barbecue Sauce
+38,Basil
+39,Bay Leaf
+40,Bay Leaves
+41,Bean Sprouts
+42,Beans
+43,Beef
+44,Beef Bouillon
+45,Beef Brisket
+46,Beef Consomme
+47,Beef For Stew
+48,Beef Hash
+49,Beef Stock
+50,Beer
+51,Bell Pepper
+52,Bell Peppers
+53,Biscuit Mix
+54,Bisquick
+55,Bite Size Shredded Rice Biscuits
+56,Black Cherry
+57,Black Coffee
+58,Black Olives
+59,Black Pepper
+60,Black Walnuts
+61,Blueberries
+62,Boiling Water
+63,Borden Milk
+64,Boyardee
+65,Brandy
+66,Bread
+67,Bread Crumbs
+68,Breadcrumbs
+69,Broccoli
+70,Broccoli Florets
+71,Broccoli Flowerets
+72,Broccoli Heads
+73,Brown Rice
+74,Brown Sugar
+75,Butter
+76,Butter Beans
+77,Buttered Bread Crumbs
+78,Buttered Toast
+79,Buttermilk
+80,Butternut Flavor
+81,Butternut Flavoring
+82,Butterscotch Pudding
+83,Cabbage
+84,Cake Flour
+85,Cake Mix
+86,Cake Yeast
+87,Campbell'S Chunky
+88,Campbell'S Cream
+89,Candied Cherries
+90,Candied Fruit
+91,Cans Great Northern White Beans
+92,Caramel Sauce
+93,Caramel Topping
+94,Caraway
+95,Caraway Seed
+96,Carrot
+97,Carrot Chunks
+98,Carrots
+99,Cashews
+100,Catsup
+101,Cauliflower
+102,Cayenne
+103,Cayenne Pepper
+104,Cayenne Red Pepper
+105,Celery
+106,Celery Salt
+107,Celery Stalks
+108,Cereal
+109,Cheddar Cheese
+110,Cheese
+111,Cheez Whiz
+112,Cherries
+113,Cherry Juice
+114,Cherry Pie Filling
+115,Cherry Pie Mix
+116,Chicken
+117,Chicken Bouillon
+118,Chicken Breasts
+119,Chicken Broth
+120,Chicken Cutlets
+121,Chicken Gravy
+122,Chicken Soup
+123,Chicken Stock
+124,Chickpeas
+125,Chili Powder
+126,Chili Sauce
+127,Chilies
+128,Chinese Noodles
+129,Chives
+130,Choco-Bake
+131,Chocolate
+132,Chocolate Cake
+133,Chocolate Cake Mix
+134,Chocolate Chips
+135,Chocolate Fudge Cake
+136,Chocolate Fudge Pudding
+137,Chocolate Pudding
+138,Chocolate Syrup
+139,Chocolate Wafers
+140,Chop Suey Vegetables
+141,Chuck Roast
+142,Chunk White Chicken
+143,Chunky Spaghetti Sauce
+144,Cider Vinegar
+145,Cinnamon
+146,Clams
+147,Cleaned Strawberries
+148,Clove Garlic
+149,Cloves
+150,Club Soda
+151,Clump
+152,Coarse Black Pepper
+153,Cocoa
+154,Coconut
+155,Coconut Flavoring
+156,Cold Milk
+157,Cold Water
+158,Commerical Sour Cream
+159,Condensed Cream
+160,Condensed Milk
+161,Confectioners Sugar
+162,Consomme
+163,Containers
+164,Cooking Apples
+165,Cooking Oats
+166,Cooking Oil
+167,Cool Whip
+168,Corn
+169,Corn Bread
+170,Corn Flake Crumbs
+171,Corn Flakes
+172,Corn Meal
+173,Corn Muffin
+174,Corn Syrup
+175,Corn Tortilla
+176,Corn Tortillas
+177,Cornbread Mix
+178,Corned Beef
+179,Cornflake Crumbs
+180,Cornflakes
+181,Cornmeal
+182,Cornstarch
+183,Cottage Cheese
+184,Crab
+185,Crabmeat
+186,Cracker Crumbs
+187,Crackers
+188,Cranberries
+189,Cranberry Juice
+190,Cranberry Sauce
+191,Cream
+192,Cream Cheese
+193,Cream Of Celery Soup
+194,Cream Of Chicken
+195,Cream Of Chicken Soup
+196,Cream Of Mushroom Soup
+197,Cream Of Shrimp Soup
+198,Cream Of Tartar
+199,Cream-Style
+200,Cream-Style Corn
+201,Crescent Rolls
+202,Crisco
+203,Crisco Oil
+204,Crisp Fried Bacon
+205,Croquette Sauce
+206,Croutons
+207,Crunchy Peanut Butter
+208,Crushed Ice
+209,Crust
+210,Cucumbers
+211,Currant Jelly
+212,Curry Powder
+213,Dark Sweet Pitted Cherries
+214,Dates
+215,Deli Beef
+216,Deluxe White Cake Mix
+217,Dill
+218,Dill Weed
+219,Dinner Rolls
+220,Dream Whip
+221,Dressing
+222,Drops Red Pepper Sauce
+223,Dry Mustard
+224,Duncan
+225,Egg
+226,Egg Noodles
+227,Egg White
+228,Egg Whites
+229,Egg Yolk
+230,Egg Yolks
+231,Eggplant
+232,Eggs
+233,English Peas
+234,Extra Lean Ground Beef
+235,Faux Crabmeat
+236,Flaked Coconut
+237,Flavor Gelatin
+238,Flavored Gelatin
+239,Flax Seed
+240,Flounder
+241,Flour
+242,Floured Blueberries
+243,Frango
+244,Frankfurters
+245,Fresh Apples
+246,Fresh Blackberries
+247,Fresh Blueberries
+248,Fresh Broccoli
+249,Fresh Cranberries
+250,Fresh Dill
+251,Fresh Fruits
+252,Fresh Ground Black Pepper
+253,Fresh Mushrooms
+254,Fresh Parsley
+255,Fresh Strawberries
+256,Fresh Tomato
+257,Fritos
+258,Frozen Artichoke
+259,Frozen Broccoli
+260,Frozen Corn
+261,Frozen Green Beans
+262,Frozen Lemonade
+263,Frozen Lemonade Concentrate
+264,Frozen Limas
+265,Frozen Mixed Vegetables
+266,Frozen Pea Pods
+267,Frozen Peas
+268,Frozen Raspberries
+269,Frozen Raspberry
+270,Frozen Spinach
+271,Frozen Strawberries
+272,Fruit Cocktail
+273,Fruit Yogurt
+274,Fully Cooked Canadian Bacon
+275,Garlic
+276,Garlic Powder
+277,Garlic Salt
+278,Ginger
+279,Ginger Ale
+280,Ginger Root
+281,Graham Cracker Crumb Crust
+282,Graham Cracker Crumbs
+283,Graham Cracker Crust
+284,Graham Cracker Crusts
+285,Graham Crackers
+286,Granulated Sugar
+287,Grape Jelly
+288,Grapes
+289,Grated Carrot
+290,Grated Cheese
+291,Grated Ginger
+292,Grated Sharp
+293,Green Baby
+294,Green Beans
+295,Green Bell Pepper
+296,Green Bell Peppers
+297,Green Chili
+298,Green Chili Peppers
+299,Green Chili Salsa Sauce
+300,Green Chilies
+301,Green Chillies
+302,Green Onion
+303,Green Onions
+304,Green Peas
+305,Green Pepper
+306,Green Peppers
+307,Green Sweet Peppers
+308,Grenadine Syrup
+309,Ground Allspice
+310,Ground Beef
+311,Ground Black Pepper
+312,Ground Chuck
+313,Ground Cinnamon
+314,Ground Cloves
+315,Ground Cumin
+316,Ground Ginger
+317,Ground Lean Beef
+318,Ground Meat
+319,Ground Nutmeg
+320,Ground Nuts
+321,Ground Pork
+322,Ground Raisins
+323,Ground Red Pepper
+324,Ground Turkey
+325,Ground White Pepper
+326,Guacamole Dip
+327,Ham
+328,Ham Bone
+329,Ham Bouillon
+330,Hamburg
+331,Hamburger
+332,Hamburger Meat
+333,Hash Browns
+334,Head Lettuce
+335,Hearts
+336,Heavy Cream
+337,Hen
+338,Herbs
+339,Honey
+340,Hormel Chili
+341,Horseradish
+342,Hot Bacon
+343,Hot Pepper
+344,Hot Water
+345,Instant Pudding
+346,Instant Rice
+347,Instant Tea
+348,Instant Vanilla Pudding
+349,Irish Potatoes
+350,Italian Dressing
+351,Italian Salad Dressing
+352,Italian Seasoning
+353,Italian Tomatoes
+354,Jalapeno Pepper
+355,Jars Junior Baby Food
+356,Ketchup
+357,Kidney Beans
+358,Lard
+359,Lasagne Noodles
+360,Lean Ground Beef
+361,Lean Hamburger
+362,Lean Pork
+363,Lemon
+364,Lemon Extract
+365,Lemon Flavor
+366,Lemon Instant Pudding
+367,Lemon Jello
+368,Lemon Jell-O
+369,Lemon Juice
+370,Lemon Pepper
+371,Lemon Yogurt
+372,Lemons
+373,Light Brown Sugar
+374,Light Corn Syrup
+375,Light Cream
+376,Light Karo Syrup
+377,Lima Beans
+378,Lime
+379,Lime Gelatin
+380,Lime Sherbet
+381,Liters Ginger Ale
+382,Low-Fat Baked Pie Shell
+383,Macaroni
+384,Mandarin Juice
+385,Mandarin Oranges
+386,Mango
+387,Manwich
+388,Maraschino Cherries
+389,Maraschino Cherry
+390,Margarine
+391,Marjoram
+392,Marshmallow Cream
+393,Marshmallow Fluff
+394,Marshmallows
+395,Mayo
+396,Mayonnaise
+397,Meal
+398,Melted Crisco
+399,Milk
+400,Milk Chocolate
+401,Mixed Vegetables
+402,Moist Coconut
+403,Molasses
+404,Mozzarella Cheese
+405,Muenster
+406,Multi-Colored Candies
+407,Mushroom
+408,Mushroom Soup
+409,Mushroom Stems
+410,Mushrooms
+411,Mustard
+412,Nonfat Buttermilk
+413,Nonfat Mayonnaise
+414,Nonfat Plain Yogurt
+415,Nonstick Cooking Spray
+416,Noodle Soup
+417,Noodles
+418,Nut Meats
+419,Nutmeg
+420,Nuts
+421,Oatmeal
+422,Oats
+423,Oil
+424,Oil Of Cinnamon
+425,Okra
+426,Oleo
+427,Olive
+428,Olive Oil
+429,Olives
+430,Onion
+431,Onion Flakes
+432,Onion Powder
+433,Onion Salt
+434,Onion Soup
+435,Onion Soup Mix
+436,Onions
+437,Orange
+438,Orange Flavoring
+439,Orange Gelatin
+440,Orange Jello
+441,Orange Juice
+442,Orange Juice Concentrate
+443,Orange Sliced Candy
+444,Oranges
+445,Oregano
+446,Oyster Liquid
+447,Oysters
+448,Packets Sugar Substitute
+449,Paprika
+450,Paraffin
+451,Parmesan
+452,Parmesan Cheese
+453,Parsley
+454,Parsley Flakes
+455,Pastry
+456,Pastry Shell
+457,Peach Juice From
+458,Peach Slices
+459,Peaches
+460,Peanut Butter
+461,Peanut Oil
+462,Peanuts
+463,Pear Halves
+464,Peas
+465,Pecan Pieces
+466,Pecans
+467,Pepper
+468,Peppermint Candy
+469,Pepperoni
+470,Peppers
+471,Persimmon Pulp
+472,Pet Milk
+473,Philadelphia Cream Cheese
+474,Picante Sauce
+475,Pickle Juice
+476,Pickles
+477,Pickling Spice
+478,Pie Crust
+479,Pie Filling
+480,Pie Shell
+481,Pie Shells
+482,Pimento
+483,Pimentos
+484,Pimiento
+485,Pineapple
+486,Pineapple Juice
+487,Pineapple Tidbits
+488,Pink Salmon
+489,Pinto Beans
+490,Pistachio Instant Pudding
+491,Pistachio Pie Filling
+492,Pork
+493,Pork Roast
+494,Pork Sausage
+495,Pork Tenderloin
+496,Potato
+497,Potatoes
+498,Potatoes O'Brien
+499,Poultry Seasoning
+500,Powdered Sugar
+501,Pumpkin
+502,Pumpkin Pie Spice
+503,Purple Grapes
+504,Purple Onion
+505,Raisins
+506,Ramen Noodles
+507,Raw Strawberries
+508,Red Apples
+509,Red Cabbage
+510,Red Kidney Beans
+511,Red Spanish
+512,Red Sweet Peppers
+513,Red Vinegar
+514,Red Wine
+515,Red Wine Vinegar
+516,Refrigerator Rolls
+517,Regular
+518,Rhubarb
+519,Rice
+520,Rice Krispies
+521,Ricotta Cheese
+522,Rolls
+523,Romaine Lettuce
+524,Romano Cheese
+525,Rosemary
+526,Rum Flavoring
+527,Rye Bread
+528,Safflower Oil
+529,Sage
+530,Salad
+531,Salad Dressing
+532,Salad Oil
+533,Salad Supreme
+534,Salad Supreme Seasoning
+535,Salsa
+536,Salsa Sauce
+537,Salt
+538,Sauce
+539,Sauerkraut
+540,Sausage
+541,Scallions
+542,Semi-Sweet Chocolate
+543,Semi-Sweet Chocolate Chips
+544,Sesame Oil
+545,Sesame Seed
+546,Sharp Cheese
+547,Sherry
+548,Shortening
+549,Shredded Cheese
+550,Shredded Lettuce
+551,Shredded Monterey Jack
+552,Shredded Monterey Jack Cheese
+553,Skinless
+554,Slivered Almonds
+555,Snow Peas
+556,Soda
+557,Solid Pack Pumpkin
+558,Sour Cream
+559,Sour Milk
+560,Soy Sauce
+561,Spaghetti
+562,Spaghetti Sauce
+563,Spanish Rice
+564,Spinach
+565,Spinach Noodles
+566,Squash
+567,Stalks Celery
+568,Steak
+569,Steak Seasoning
+570,Stew Meat
+571,Stove Top Stuffing
+572,Strawberries
+573,Strawberry
+574,Strawberry Jello
+575,Stuffing Mix
+576,Sugar
+577,Summer Squash
+578,Sunflower Seeds
+579,Sweet Basil
+580,Sweet Chocolate Chips
+581,Sweet Milk
+582,Sweet Onions
+583,Sweet Peas
+584,Sweet Potatoes
+585,Sweet Relish
+586,Sweet Sausage
+587,Swiss
+588,Swiss Cheese
+589,Syrup
+590,Tabasco Sauce
+591,Taco
+592,Taco Sauce
+593,Taco Seasoning
+594,Taco Seasoning Mix
+595,Tamales
+596,Tamari Sauce
+597,Tapioca
+598,Tarragon
+599,Tart Cherries
+600,Tater
+601,Thin Green Onion Strips
+602,Thyme
+603,Tomato
+604,Tomato Juice
+605,Tomato Paste
+606,Tomato Sauce
+607,Tomato Soup
+608,Tomatoes
+609,Tortilla Chips
+610,Tortillas
+611,Triple Sec
+612,Tuna
+613,Turmeric
+614,Twinkies
+615,Unflavored Gelatin
+616,Unflavored Gelatine
+617,Unsalted Butter
+618,Unsalted Soda Crackers
+619,Unsweetened Applesauce
+620,Unsweetened Chocolate
+621,Unsweetened Cocoa
+622,Vanilla
+623,Vanilla Extract
+624,Vanilla Flavor
+625,Vanilla Flavoring
+626,Vanilla Ice Cream
+627,Vanilla Instant Pudding
+628,Vanilla Instant Pudding Mix
+629,Vanilla Pudding
+630,Vanilla Wafers
+631,Veg-All
+632,Vegetable Cooking Spray
+633,Vegetable Oil
+634,Vegetable Shortening
+635,Vegetable Soup Mix
+636,Vegetables
+637,Velveeta
+638,Velveeta Cheese
+639,Vermicelli
+640,Vidalia Onion
+641,Vinegar
+642,Walnuts
+643,Warm Beer
+644,Warm Water
+645,Water
+646,Water Chestnuts
+647,Watermelon Rind
+648,Wesson Oil
+649,Whipped Cream
+650,Whipping Cream
+651,White Batter
+652,White Cake
+653,White Cake Mix
+654,White Corn Syrup
+655,White Grapes
+656,White Karo Syrup
+657,White Lily
+658,White Minute Rice
+659,White Onion
+660,White Sugar
+661,White Syrup
+662,White Vinegar
+663,White Wine
+664,Whole Cloves
+665,Whole Kernel Corn
+666,Whole Kernel Golden Corn
+667,Wild Rice
+668,Wine Vinegar
+669,Worcestershire Sauce
+670,Yeast
+671,Yellow Apples
+672,Yellow Beans
+673,Yellow Cake
+674,Yellow Cake Mix
+675,Yellow Food Coloring
+676,Yellow Hominy
+677,Yellow Lima Beans
+678,Your Choice
+679,Zucchini
