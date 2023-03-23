@@ -18,6 +18,9 @@ class AllergyFactory(factory.django.DjangoModelFactory):
         if top_ten_allergic_ingredients:
             random_allergic_ingredient = random.choice(top_ten_allergic_ingredients)
             return random_allergic_ingredient.allergic_ingredient
+        else:
+            # Add a fallback value when top_ten_allergic_ingredients is empty
+            return "Unknown Allergy"
 
 
 class ProfileFactory(factory.django.DjangoModelFactory):
