@@ -3,7 +3,7 @@ from typing import List
 from django.db.models import QuerySet
 from django.core.management.base import BaseCommand
 from ...factory import ProfileFactory, AllergyFactory, RecipeFactory
-from ...models import MockRecipe, RecipeFavorite, RecipePersonal, Recipe, Profile, Allergy
+from ...models import MockRecipe, RecipeFavorite, RecipePersonal, Recipe, Profile, Allergy, Instruction
 
 
 class ProfileBuilder:
@@ -22,10 +22,24 @@ class ProfileBuilder:
         self.profile.save()
         return self
 
-    def add_personal_recipes(self, num_recipes, instructions=None):
+    def add_personal_recipes(self, num_recipes):
         for i in range(num_recipes):
-            recipe = RecipeFactory.create_recipe(self.profile, instructions=instructions)
+            recipe = RecipeFactory.create_recipe(self.profile)
+            mock_recipe = MockRecipe.objects.filter(m_recipe_name=recipe.recipe_name).first()
+            if mock_recipe:
+                RecipeFactory.add_instructions(recipe, mock_recipe)
+                self.profile.personal_recipes.add(recipe)
         return self
+
+    def get_personal_recipe_instructions(self):
+        personal_recipe_instructions = []
+        for recipe in self.profile.personal_recipes.all():
+            instructions = [instruction.instruction for instruction in recipe.instructions.all()]
+            personal_recipe_instructions.append({"recipe_name": recipe.recipe_name, "instructions": instructions})
+        return personal_recipe_instructions
+
+    def get_profile(self):
+        return self.profile
 
     def add_favorite_recipes(self, favorite_recipe_names=None):
         if favorite_recipe_names:
@@ -36,12 +50,10 @@ class ProfileBuilder:
                     favorites.append(recipe)
         else:
             favorites = ProfileFactory.favorite_recipes(self.profile)
+
         self.profile.favorite_recipes.set(favorites)
         self.profile.save()
         return self
-
-    def get_profile(self):
-        return self.profile
 
 
 class Command(BaseCommand):
@@ -53,8 +65,7 @@ class Command(BaseCommand):
         parser.add_argument('--favorite_recipes', nargs='+', help='List of favorite recipe names')
         parser.add_argument('--instructions', nargs='+', help='List of instructions for personal recipes')
 
-
-def handle(self, *args, **options):
+    def handle(self, *args, **options):
         num_recipes = options.get('num_recipes', 10)
         allergies = options.get('allergies', [])
         favorite_recipes = options.get('favorite_recipes', [])
@@ -83,4 +94,12 @@ def handle(self, *args, **options):
             self.stdout.write(self.style.SUCCESS(
                 f'Favorite Recipe: "{favorite.recipe_name}" added by "{favorite.profile.profile_first_name}" was '
                 f'successfully added to {profile.profile_first_name}s Favorites'
+            ))
+
+        # Output cooking instructions
+        personal_recipe_instructions = profile_builder.get_personal_recipe_instructions()
+        for recipe_instructions in personal_recipe_instructions:
+            self.stdout.write(self.style.SUCCESS(
+                f'Cooking instructions for "{recipe_instructions["recipe_name"]}": '
+                f'{", ".join(recipe_instructions["instructions"])}'
             ))

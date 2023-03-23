@@ -10,7 +10,7 @@ from .models import Ingredient, Recipe, Allergy, Profile, RecipeIngredient, Reci
 
 class InstructionFactory(factory.django.DjangoModelFactory):
     class Meta:
-        model = MockInstruction
+        model = Instruction
 
 
 class AllergyFactory(factory.django.DjangoModelFactory):
@@ -155,6 +155,8 @@ class RecipeFactory(factory.django.DjangoModelFactory):
         recipe.ingredients.set([ri.ingredient for ri in recipe_ingredients])
 
         # Add instructions to the recipe
+        cls.add_instructions(recipe, mock_recipe)
+
         for mock_instruction in mock_recipe.m_instructions.all():
             instruction = Instruction(instruction=mock_instruction, recipe=recipe)
             instruction.save()
@@ -163,6 +165,12 @@ class RecipeFactory(factory.django.DjangoModelFactory):
         recipe.add_allergic_ingredients()
 
         return recipe
+
+    @classmethod
+    def add_instructions(cls, recipe, mock_recipe):
+        for mock_instruction in mock_recipe.m_instructions.all():
+            instruction = InstructionFactory(recipe=recipe, instruction=mock_instruction.m_instruction)
+            instruction.save()
 
     @classmethod
     def create_recipe(cls, profile):
