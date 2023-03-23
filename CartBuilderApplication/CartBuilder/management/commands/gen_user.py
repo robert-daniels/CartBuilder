@@ -22,9 +22,9 @@ class ProfileBuilder:
         self.profile.save()
         return self
 
-    def add_personal_recipes(self, num_recipes):
+    def add_personal_recipes(self, num_recipes, instructions=None):
         for i in range(num_recipes):
-            recipe = RecipeFactory.create_recipe(self.profile)
+            recipe = RecipeFactory.create_recipe(self.profile, instructions=instructions)
         return self
 
     def add_favorite_recipes(self, favorite_recipe_names=None):
@@ -51,8 +51,10 @@ class Command(BaseCommand):
         parser.add_argument('--num_recipes', type=int, default=10, help='Number of recipes to generate')
         parser.add_argument('--allergies', nargs='+', help='List of allergies')
         parser.add_argument('--favorite_recipes', nargs='+', help='List of favorite recipe names')
+        parser.add_argument('--instructions', nargs='+', help='List of instructions for personal recipes')
 
-    def handle(self, *args, **options):
+
+def handle(self, *args, **options):
         num_recipes = options.get('num_recipes', 10)
         allergies = options.get('allergies', [])
         favorite_recipes = options.get('favorite_recipes', [])

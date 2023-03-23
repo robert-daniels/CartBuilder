@@ -3,9 +3,14 @@ import factory
 from faker import Faker
 from django.db import IntegrityError
 from django.core.exceptions import ValidationError
-from .models import MockRecipe, MockIngredient, MockAllergicIngredient, TopTenMockAllergicIngredients
-from .models import Ingredient, Recipe, Allergy, Profile, RecipeIngredient, RecipeFavorite, MockRecipe,\
-    AllergicIngredient
+from .models import MockRecipe, MockIngredient, MockAllergicIngredient, TopTenMockAllergicIngredients, MockInstruction
+from .models import Ingredient, Recipe, Allergy, Profile, RecipeIngredient, RecipeFavorite, MockRecipe, \
+    AllergicIngredient, Instruction
+
+
+class InstructionFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = MockInstruction
 
 
 class AllergyFactory(factory.django.DjangoModelFactory):
@@ -18,9 +23,6 @@ class AllergyFactory(factory.django.DjangoModelFactory):
         if top_ten_allergic_ingredients:
             random_allergic_ingredient = random.choice(top_ten_allergic_ingredients)
             return random_allergic_ingredient.allergic_ingredient
-        else:
-            # Add a fallback value when top_ten_allergic_ingredients is empty
-            return "Unknown Allergy"
 
 
 class ProfileFactory(factory.django.DjangoModelFactory):
@@ -151,6 +153,11 @@ class RecipeFactory(factory.django.DjangoModelFactory):
 
         RecipeIngredient.objects.bulk_create(recipe_ingredients)
         recipe.ingredients.set([ri.ingredient for ri in recipe_ingredients])
+
+        # Add instructions to the recipe
+        for mock_instruction in mock_recipe.m_instructions.all():
+            instruction = Instruction(instruction=mock_instruction, recipe=recipe)
+            instruction.save()
 
         # Add allergic ingredients to the recipe
         recipe.add_allergic_ingredients()
