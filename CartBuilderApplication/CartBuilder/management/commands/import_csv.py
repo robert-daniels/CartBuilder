@@ -45,7 +45,9 @@ class Command(BaseCommand):
                     )
                     recipe.m_instructions.add(instruction)
 
-                    print(instruction)
+                    print(instruction.m_instruction)
+
+                print('\n')
 
                 allergic_ingredient_names = row[6].split(', ')
                 for allergic_ingredient_name in allergic_ingredient_names:

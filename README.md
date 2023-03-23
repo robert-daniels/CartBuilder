@@ -15,6 +15,14 @@ The Ingredient model has a single field:
 >***name***: The name of the ingredient.
 
 ___
+
+### Instruction Model
+***Instruction***: Represents a instruction used in a recipe.
+A Recipe can have many instructions.
+
+>***instruction***: An instruction to a recipe
+
+___
 ### Profile Model
 
 
@@ -67,6 +75,8 @@ ___
 >***ingredients***: A many-to-many relationship with the Ingredient model through the RecipeIngredient model.
 
 >***allergic_ingredients***: A many-to-many relationship with the AllergicIngredient model.
+
+>***instructions***: A many-to-many relationship with instruction model
 
 >***favorite_recipes***: A many-to-many relationship with the Profile model through the RecipeFavorite model.
 
@@ -162,6 +172,8 @@ With three fields:
 
 >***m_ingredients***: A many-to-many relationship with the MockIngredient model.
 
+>***m_instructions***: A many-to-many relationship with the MockInstruction model.
+
 The ***MockRecipe*** model also includes three methods:
 
 >***get_mock_recipe_name()***: Retrieves the name of the mock recipe.
@@ -169,6 +181,13 @@ The ***MockRecipe*** model also includes three methods:
 >***get_mock_allergies_for_recipe()***: Retrieves all mock allergic ingredients associated with the mock recipe.
 
 >***get_mock_ingredients()***: Retrieves all mock ingredients associated with the mock recipe.
+
+---
+### MockInstruction
+***MockInstruction***: A mock model for holding instruction related to recipes.
+with a single field:
+
+>***m_instruction***: A single cooking instruction 
 
 ---
 

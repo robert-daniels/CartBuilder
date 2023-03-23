@@ -91,8 +91,6 @@ class Allergy(models.Model):
         return self.allergy_name
 
 
-
-
 class Profile(models.Model):
     profile_id = models.AutoField(primary_key=True)
     profile_first_name = models.CharField(max_length=50)
