@@ -3,8 +3,28 @@
 {% block content %}
 
 <div class="container">
+    <!--Alert messages for when something wrong happens when you are trying to sign in.-->
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            <strong>Message:</strong> {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
 
-  <h2>TODO: work in progress. Clean up interface</h2>
+  <h2>Sign In</h2>
+    <!--Not sure how this code would work in a block form, or if a block form is even necessary.-->
+        <form action="/signin" method="post">
+            {%  csrf_token %}
+            <label for="">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter Your Username" Required>
+            <br>
+            <label for="">First Name</label>
+            <input type="text" id="fname" name="fname" placeholder="Enter Your Password" Required>
+            <br>
+            <button type="submit">Sign Up</button>
+        </form>
 
   {% block form %}{% include "./components/login_form_card.html" %}{% endblock %}
 
