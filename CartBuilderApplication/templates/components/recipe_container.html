@@ -1,4 +1,6 @@
-<h1>?: recipeTitle</h1>
+{% load static %}
+
+<h1>{{ recipe.recipeTitle }}</h1>
 
 
         <div class="accordion" id="accordionExample">
@@ -9,11 +11,10 @@
                         Ingredients
                     </button>
                 </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                    data-bs-parent="#accordionExample">
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
                     <div class="accordion-body">
-                        <strong>?: NER</strong> <br>
-                        :? ingredients Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                        <strong>{{ recipe.recipeNER }}</strong> <br>
+                        {{ recipe.recipeIngredients }}
                         incididunt ut labore et dolore magna aliqua.
                     </div>
                 </div>
@@ -25,30 +26,11 @@
                         Directions
                     </button>
                 </h2>
-                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                    data-bs-parent="#accordionExample">
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
                     <div class="accordion-body">
-                        ?: Directions. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magna aliqua. Integer eget aliquet nibh praesent tristique magna
-                        sit. Maecenas sed enim ut sem viverra aliquet eget sit. Quis hendrerit dolor magna eget est
-                        lorem ipsum dolor. Et tortor consequat id porta. Purus sit amet luctus venenatis lectus magna.
-                        Feugiat in ante metus dictum at. Ipsum nunc aliquet bibendum enim. Mauris pharetra et ultrices
-                        neque.
+                        {{ recipe.recipeDirections }}
                     </div>
                 </div>
 
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingThree">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Reviews
-                        </button>
-                    </h2>
-                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                        data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            ?: Reviews
-                        </div>
-                    </div>
-                </div>
+               
             </div>

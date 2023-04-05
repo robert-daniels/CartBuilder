@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Ingredient, Recipe, Allergy, Profile, RecipeIngredient, SimpleRecipe
+from .models import Ingredient, Recipe, Allergy, Profile, RecipeIngredient, SimpleMaster
 from django.http import HttpResponse
 from django.views.generic import ListView
 from .models import Recipe
@@ -32,14 +32,16 @@ def about(request):
 
 
 def recipes(request):
-    recipe_list = SimpleRecipe.objects.all()
+    recipe_list = SimpleMaster.objects.all()
     context = {'full_recipe_list': recipe_list}
     return render(request, 'recipes.html', context)
 
 
 # Not yet implemented
-def recipe(request):
-    return render(request, 'recipe.html')
+def recipe(request, requestedRecipeKey):
+    recipeObject = SimpleMaster.objects.get(recipeKey=requestedRecipeKey)
+    context = {'recipe': recipeObject}
+    return render(request, 'recipe.html', context)
 
 
 def ingredients(request):

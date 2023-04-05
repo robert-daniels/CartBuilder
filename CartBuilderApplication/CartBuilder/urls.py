@@ -13,5 +13,5 @@ urlpatterns = [
     path('profile', views.profile, name="profile"),
     path('login', views.login, name='login'),
     path('registration', views.registration, name="registration"),
-    path('recipe', views.recipe, name="recipe")
+    path('recipe/<requestedRecipeKey>/', views.recipe, name="recipe")
 ]

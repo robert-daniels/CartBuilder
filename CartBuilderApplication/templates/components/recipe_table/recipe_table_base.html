@@ -1,27 +1,30 @@
 {% load static %}
 
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col">Recipe</th>
-            <th scope="col">Ingredients</th>
-            <th scope="col">Times Viewed</th>
-        </tr>
-    </thead>
-    <tbody>
+
+<div class="table-responsive" style="max-height: 50vh">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Recipe</th>
+                <th scope="col">Ingredients</th>
+            </tr>
+        </thead>
+        <tbody>
 
 
-        {% for recipe in full_recipe_list %}
-        <tr>
-            <td><a href="recipe/{{ recipe.recipeKey }} ">{{ recipe.recipeName }}</a></td>
+            {% for recipe in full_recipe_list %}
+            <tr>
+                <td><a href="recipe/{{ recipe.recipeKey }} ">{{ recipe.recipeTitle }}</a></td>
+                <td>{{ recipe.recipeNER }}</td>
 
 
-            <!-- Add in possible NER ingredients -->
-        </tr>
-        {% empty %}
-        <li>Error loading non-mock recipes.</li>
-        {% endfor %}
+                <!-- Add in possible NER ingredients -->
+            </tr>
+            {% empty %}
+            <li>Error loading non-mock recipes.</li>
+            {% endfor %}
 
-    </tbody>
-</table>
+        </tbody>
+    </table>
 
+</div>
