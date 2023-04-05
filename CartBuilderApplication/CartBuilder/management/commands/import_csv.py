@@ -1,7 +1,7 @@
 import csv
 import os
 from django.core.management.base import BaseCommand
-from ...models import MockRecipe, MockIngredient, MockAllergicIngredient
+from ...models import MockRecipe, MockIngredient, MockAllergicIngredient, MockInstruction
 
 
 class Command(BaseCommand):
@@ -25,8 +25,8 @@ class Command(BaseCommand):
                 # Create a new recipe object
                 recipe = MockRecipe.objects.create(m_recipe_name=recipe_name)
 
+                # Add ingredients to recipe
                 ingredient_names = row[2].split(', ')
-
                 for ingredient_name in ingredient_names:
                     ingredient, created = MockIngredient.objects.get_or_create(
                         m_ingredient_name=ingredient_name
@@ -34,6 +34,18 @@ class Command(BaseCommand):
                     recipe.m_ingredients.add(ingredient)
 
                     print("Ingredient: ", ingredient_name)
+
+                print('\n')
+
+                # Add cooking instructions to recipe
+                instructions = row[3].split(', ')
+                for instruction in instructions:
+                    instruction, created = MockInstruction.objects.get_or_create(
+                        m_instruction=instruction
+                    )
+                    recipe.m_instructions.add(instruction)
+
+                    print(instruction.m_instruction)
 
                 print('\n')
 

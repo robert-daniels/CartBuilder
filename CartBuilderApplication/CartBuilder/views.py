@@ -3,6 +3,7 @@ from .models import Ingredient, Recipe, Allergy, Profile, RecipeIngredient, Simp
 from django.http import HttpResponse
 from django.views.generic import ListView
 from .models import Recipe
+from django.shortcuts import render, get_object_or_404
 
 
 class SearchView(ListView):
@@ -55,11 +56,22 @@ def ingredients(request):
 def allergies(request):
     return render(request, 'allergies.html')
 
-def profile(request):
-    return render(request, 'profile.html')
+
+def profile(request, profile_id):
+    # Retrieve the Profile object
+    profile_obj = Profile.objects.get().all()
+    profile_id = profile_obj.id
+
+    # Pass the profile_id to the template context
+    context = {'profile_id': profile_id}
+
+    # CAN NOT FIND THE STATIC ASSETS in templates folder?
+    return render(request, 'profile.html', context)
+
 
 def login(request):
     return render(request, 'login.html')
+
 
 def registration(request):
     return render(request, 'registration.html')
