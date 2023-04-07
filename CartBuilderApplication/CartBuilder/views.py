@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.views.generic import ListView
 from .models import Recipe
 from django.shortcuts import render, get_object_or_404
+import random
 
 
 class SearchView(ListView):
@@ -23,9 +24,18 @@ class SearchView(ListView):
 
 # Create your views here.
 def home(request):
-    popular_recipes = Recipe.get_popular_recipes()
-    ctx = {'popular_recipes': popular_recipes}
-    return render(request, 'home.html', ctx)
+    # Get all recipeKeys from the SimpleMaster model
+    recipe_keys = SimpleMaster.objects.values_list('recipeKey', flat=True)
+
+    # Select a random recipeKey
+    random_key = random.choice(recipe_keys)
+
+    # Retrieve the recipe with the selected recipeKey
+    random_recipe = SimpleMaster.objects.get(recipeKey=random_key)
+
+    context = {'random_recipe': random_recipe}
+
+    return render(request, 'home.html', context)
 
 
 def about(request):
@@ -37,13 +47,15 @@ def recipes(request):
     context = {'full_recipe_list': recipe_list}
     return render(request, 'recipes.html', context)
 
+
 def recipe(request, requestedRecipeKey):
     recipeObject = SimpleMaster.objects.get(recipeKey=requestedRecipeKey)
     context = {'recipe': recipeObject}
     return render(request, 'recipe.html', context)
 
+
 def search(request):
-    searchTerm = request.GET.get('query','')
+    searchTerm = request.GET.get('query', '')
     searchResults = SimpleMaster.objects.filter(recipeNER__contains=searchTerm).values()
     context = {'searchResults': searchResults, 'query': searchTerm}
     return render(request, 'search.html', context)
