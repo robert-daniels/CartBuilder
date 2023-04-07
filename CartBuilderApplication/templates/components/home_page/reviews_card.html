@@ -3,13 +3,13 @@
         <div class="row gx-5 justify-content-center">
             <div class="col-lg-10 col-xl-7">
                 <div class="text-center">
-                    <div class="fs-4 mb-4 fst-italic">"Food is great! I love food. Especially Food. And food."</div>
+                    <div class="fs-4 mb-4 fst-italic">{{ selected_review.review }}</div>
                     <div class="d-flex align-items-center justify-content-center">
                         <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
                         <div class="fw-bold">
                             Satisfied Recipe Box Customer
                             <span class="fw-bold text-primary mx-1">/</span>
-                            Avid Eater
+                            {{ selected_review.name }}
                         </div>
                     </div>
                 </div>
