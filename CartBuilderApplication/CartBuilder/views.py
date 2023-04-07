@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Ingredient, Recipe, Allergy, Profile, RecipeIngredient, SimpleMaster
 from django.http import HttpResponse
 from django.views.generic import ListView
 from .models import Recipe
 from django.shortcuts import render, get_object_or_404
 import random
+from django.contrib import messages
 
 
 class SearchView(ListView):
@@ -59,6 +60,33 @@ def search(request):
     searchResults = SimpleMaster.objects.filter(recipeNER__contains=searchTerm).values()
     context = {'searchResults': searchResults, 'query': searchTerm}
     return render(request, 'search.html', context)
+
+
+def add_recipe(request):
+    if request.method == 'POST':
+        recipe_title = request.POST['recipeTitle']
+        recipe_ingredients = request.POST['recipeIngredients']
+        recipe_directions = request.POST['recipeDirections']
+        recipe_ner = request.POST['recipeNER']
+
+        # our Mock data ends at 500. (hopefully no collisions, this isn't perfect)
+        random_key = random.randint(501, 10000000000)
+
+        new_recipe = SimpleMaster(
+            recipeKey=random_key,
+            recipeTitle=recipe_title,
+            recipeIngredients=recipe_ingredients,
+            recipeDirections=recipe_directions,
+            recipeNER=recipe_ner
+        )
+        new_recipe.save()
+
+        print("Recipe saved")
+
+        messages.success(request, "Recipe added successfully!")
+        return redirect('/cartbuilder')
+
+    return render(request, 'add_recipe.html')
 
 
 def ingredients(request):
