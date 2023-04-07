@@ -230,3 +230,10 @@ class SimpleRecipeIngredientBlurb(models.Model):
 class SimpleRecipeDirection(models.Model):
     recipeKey = models.IntegerField()
     directions = models.TextField()
+
+class SimpleMaster(models.Model):
+    recipeKey = models.IntegerField()
+    recipeTitle = models.TextField()
+    recipeIngredients = models.TextField()
+    recipeDirections = models.TextField()
+    recipeNER = models.TextField()
