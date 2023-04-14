@@ -116,8 +116,8 @@ def add_recipe(request):
         recipe_ingredients = request.POST['recipeIngredients']
         recipe_directions = request.POST['recipeDirections']
         recipe_ner = request.POST['recipeNER']
+        recipe_image = request.FILES.get('recipeImage')
 
-        # our Mock data ends at 500. (hopefully no collisions, this isn't perfect)
         random_key = random.randint(501, 10000000000)
 
         new_recipe = SimpleMaster(
@@ -125,11 +125,10 @@ def add_recipe(request):
             recipeTitle=recipe_title,
             recipeIngredients=recipe_ingredients,
             recipeDirections=recipe_directions,
-            recipeNER=recipe_ner
+            recipeNER=recipe_ner,
+            recipeImage=recipe_image
         )
         new_recipe.save()
-
-        print("Recipe saved")
 
         messages.success(request, "Recipe added successfully!")
         return redirect('/cartbuilder')

@@ -243,5 +243,6 @@ class SimpleMaster(models.Model):
     recipeIngredients = models.TextField()
     recipeDirections = models.TextField()
     recipeNER = models.TextField()
+    recipeImage = models.ImageField(upload_to='recipe_images/', null=True, blank=True)
 
 

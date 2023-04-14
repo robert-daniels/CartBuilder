@@ -3,7 +3,7 @@
 {% block content %}
   <div class="container">
     <h1 class="my-4">Add a Recipe</h1>
-      <form method="post" class="needs-validation" novalidate action="{% url 'add_recipe' %}">
+      <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate action="{% url 'add_recipe' %}">
       {% csrf_token %}
       <div class="mb-3">
         <label for="recipeTitle" class="form-label">Recipe Title</label>
@@ -21,6 +21,13 @@
         <label for="recipeNER" class="form-label">Recipe Allergies</label>
         <textarea name="recipeNER" class="form-control" id="recipeNER" rows="3" required></textarea>
       </div>
+      <div class="mb-3">
+        <label for="recipeImage" class="form-label">Recipe Image</label>
+        <input type="file" name="recipeImage" class="form-control" id="recipeImage">
+      </div>
+
+      <br>
+
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
