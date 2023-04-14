@@ -5,17 +5,23 @@
     <div class="card h-100 shadow border-0">
         <img class="card-img-top" src="{% static "./assets/other/Food_image_small.jpg" %}" alt="..." />
         <div class="card-body p-4">
-            <div class="badge bg-primary bg-gradient rounded-pill mb-2">{{ recipe.numFavorites }}</div>
+            <div class="badge bg-primary bg-gradient rounded-pill mb-2">Most Recent</div>
             <a class="text-decoration-none link-dark stretched-link" href="{% url 'recipe' requestedRecipeKey=recipe.recipeKey %}"><h5 class="card-title mb-3">{{ recipe.recipeTitle }}</h5></a>
-            <p class="card-text mb-0">{{ recipe.recipeIngredients }}</p>
+            <p class="card-text mb-0">
+                <strong>Ingredients:</strong><br>
+                {{ recipe.recipeIngredients|truncatewords:30 }}
+            </p>
         </div>
         <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
             <div class="d-flex align-items-end justify-content-between">
                 <div class="d-flex align-items-center">
                     <div class="small">
-                        <div class>Allergies: </div>
-                        <div class="fw-bold"> {{ recipe.recipeNER }}</div>
+                        <strong>Allergies:</strong>
+                        <div> {{ recipe.recipeNER }}</div>
                     </div>
+                </div>
+                <div>
+                    <span class="badge bg-secondary bg-gradient rounded-pill">{{ recipe.recipeCategory }}</span>
                 </div>
             </div>
         </div>
