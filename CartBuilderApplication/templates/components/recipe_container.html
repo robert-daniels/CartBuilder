@@ -1,37 +1,68 @@
 {% load static %}
 
+<style>
+    /* Hide unnecessary elements for printing */
+    .navbar {
+        display: none;
+    }
+
+    /* Adjust the recipe layout for printing */
+    .recipe-container {
+        width: 100%;
+        margin: 0;
+    }
+
+    /* Open collapsible containers when printing */
+    @media print {
+        .accordion-collapse {
+            display: block !important;
+            height: auto !important;
+            visibility: visible !important;
+        }
+    }
+</style>
+
 <h1>{{ recipe.recipeTitle }}</h1>
 
-
-        <div class="accordion" id="accordionExample">
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Ingredients
-                    </button>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
-                    <div class="accordion-body">
-                        <strong>{{ recipe.recipeNER }}</strong> <br>
-                        <hr>
-                        {{ recipe.recipeIngredients }}
-                        incididunt ut labore et dolore magna aliqua.
-                    </div>
-                </div>
+<div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Ingredients
+            </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+            <div class="accordion-body">
+                <strong>{{ recipe.recipeNER }}</strong> <br>
+                <hr>
+                {{ recipe.recipeIngredients }}
             </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Directions
-                    </button>
-                </h2>
-                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
-                    <div class="accordion-body">
-                        {{ recipe.recipeDirections }}
-                    </div>
-                </div>
-
-               
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Directions
+            </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
+            <div class="accordion-body">
+                {{ recipe.recipeDirections }}
             </div>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<div>
+    <button onclick="printRecipe()" class="btn btn-primary">Print Recipe</button>
+</div>
+
+<script>
+    function printRecipe() {
+        window.print();
+    }
+</script>
