@@ -3,7 +3,7 @@
 <style>
     /* Hide unnecessary elements for printing */
     @media print {
-        .navbar, .sidebar, .footer {
+        .navbar, .print-button {
             display: none;
         }
     }
@@ -60,7 +60,7 @@
 <br>
 
 <div>
-    <button onclick="printRecipe()" class="btn btn-primary">Print Recipe</button>
+    <button onclick="printRecipe()" class="btn btn-primary print-button">Print Recipe</button>
 </div>
 
 <script>
