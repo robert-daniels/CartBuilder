@@ -96,6 +96,13 @@ def search(request):
     return render(request, 'search.html', context)
 
 
+def search_by_recipe(request):
+    searchTerm = request.GET.get('query')
+    searchResults = SimpleMaster.objects.filter(recipeTitle__contains=searchTerm).values()
+    context = {'searchResults': searchResults, 'query': searchTerm}
+    return render(request, 'search.html', context)
+
+
 def add_recipe(request):
     if request.method == 'POST':
         recipe_title = request.POST['recipeTitle']

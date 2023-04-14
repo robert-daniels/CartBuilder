@@ -15,11 +15,26 @@
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 
 
-                    <form class="d-flex" action="{% url 'search_by_recipe' %}">
+                    <form class="d-flex" action="{% url 'search_by_ingredient' %}">
                         <input class="form-control me-2" type="text" name="query" placeholder="Find your meal!"
                             aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
+
+                    <br>
+
+
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" onclick="focusSearchBox('sbr')"
+                        >Search By Recipe</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" onclick="focusSearchBox('sbi')"
+                        >Search By Ingredient</a>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{% url 'add_recipe' %}">Add A Recipe</a>
                     </li>
@@ -56,3 +71,18 @@
         </div>
     </div>
 </nav>
+
+<script>
+function focusSearchBox(id) {
+    const element = document.getElementById(id);
+    if (element) {
+        const input = element.querySelector('input');
+        if (input) {
+            input.focus();
+            const yOffset = -100; // Adjust this value to change the offset
+            const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+    }
+}
+</script>
