@@ -2,8 +2,10 @@
 
 <style>
     /* Hide unnecessary elements for printing */
-    .navbar {
-        display: none;
+    @media print {
+        .navbar, .sidebar, .footer {
+            display: none;
+        }
     }
 
     /* Adjust the recipe layout for printing */
