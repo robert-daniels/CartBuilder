@@ -67,8 +67,15 @@ def home(request):
     # Select a random review from the list
     selected_review = random.choice(reviews)
 
-    # Pass the selected review to your template
-    context = {'selected_review': selected_review, 'random_recipe': random_recipe}
+    ####
+    # for top_recipe_card
+    latest_recipes = SimpleMaster.objects.order_by('-id')[:3]
+
+    context = {
+        'selected_review': selected_review,
+        'random_recipe': random_recipe,
+        'latest_recipes': latest_recipes,
+    }
 
     return render(request, 'home.html', context)
 
