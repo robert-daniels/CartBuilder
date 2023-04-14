@@ -123,30 +123,6 @@ def add_recipe(request):
     return render(request, 'add_recipe.html')
 
 
-def random_review(request):
-    reviews = [
-        "I've been using Recipe Box for a few weeks now and it has truly transformed my cooking experience! "
-        "The variety of recipes available is impressive, and I love the user-friendly interface. Adding my own recipes "
-        "to the platform has been a breeze.",
-        "Recipe Box has become my go-to app when meal planning. The search functionality is fantastic, "
-        "allowing me to find recipes based on specific ingredients or dietary restrictions. The step-by-step "
-        "instructions are clear and concise, which has helped me improve my culinary skills tremendously.",
-        "I'm a busy mom, and Recipe Box has been a game-changer for me. The allergy information is a great feature for "
-        "my family since my son has a nut allergy. I've recommended Recipe Box to all my friends!",
-        "As a beginner in the kitchen, I was initially overwhelmed with the thought of cooking. "
-        "Recipe Box has made it so much easier for me to learn and gain confidence. "
-        "The app has a great selection of beginner-friendly recipes, and the instructional videos are incredibly "
-        "helpful."
-    ]
-
-    # Select a random review from the list
-    selected_review = random.choice(reviews)
-
-    # Pass the selected review to your template
-    context = {'selected_review': selected_review}
-    return render(request, 'random_review.html', context)
-
-
 def ingredients(request):
     return render(request, 'ingredients.html')
 
