@@ -1,12 +1,19 @@
 {% load static %}
 
+<style>
+    .card-img-top-fixed {
+        height: 200px;
+        object-fit: cover;
+    }
+</style>
+
 {% for recipe in latest_recipes %}
 <div class="col-lg-4 mb-5">
     <div class="card h-100 shadow border-0">
         {% if recipe.recipeImage %}
-            <img class="card-img-top" src="{{ recipe.recipeImage.url }}" alt="Recipe image" />
+            <img class="card-img-top card-img-top-fixed" src="{{ recipe.recipeImage.url }}" alt="Recipe image" />
         {% else %}
-            <img class="card-img-top" src="{% static "./assets/other/Food_image_small.jpg" %}" alt="Default image" />
+            <img class="card-img-top card-img-top-fixed" src="{% static "./assets/other/Food_image_small.jpg" %}" alt="Default image" />
         {% endif %}
         <div class="card-body p-4">
             <div class="badge bg-primary bg-gradient rounded-pill mb-2">Most Recent</div>
