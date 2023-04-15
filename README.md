@@ -1,217 +1,156 @@
-# Cart Builder
+# CartBuilder: Models Documentation
 
 This Django application provides a platform for users to manage their recipes, 
 taking into account personal preferences, allergies, and favorites. 
 The following models are used to store and manage the data:
 
-## Tables:
+## Models:
 
 ___
-### Ingredient Model
-***Ingredient***: Represents an ingredient used in a recipe.
+### SimpleRecipe Model
+***SimpleRecipe***: This model represents a simple recipe with only two fields:
 
-The Ingredient model has a single field:
+>***recipeKey***: An integer field that serves as the primary key for the model.
 
->***name***: The name of the ingredient.
+>***recipeName***: A character field that contains the name of the recipe. The maximum length is set to 60 characters.
+
+___
+
+### SimpleIngredient Model
+***SimpleIngredient***: This model represents a simple ingredient with the following fields:
+
+>***Ingredients_ID***: An integer field that serves as the primary key for the model.
+
+>***Ingredients_Name***:  A character field that contains the name of the ingredient. The maximum length is set to 60 characters.
 
 ___
 
-### Instruction Model
-***Instruction***: Represents a instruction used in a recipe.
-A Recipe can have many instructions.
+### SimpleNERIngredient Model
+***SimpleNERIngredient***: This model represents a Named Entity Recognition (NER) ingredient:
 
->***instruction***: An instruction to a recipe
+>***recipeKey***: An integer field that connects the NER ingredient to the corresponding recipe.
+
+>***NER_Name***: A character field that contains the named entity recognized ingredient. The maximum length is set to 60 characters.
 
 ___
-### Profile Model
 
+### SimpleRecipeIngredientBlurb Model
+***SimpleRecipeIngredientBlurb***: This model represents a recipe ingredient blurb:
 
-***Profile***: Represents a user's profile, including their allergies, personal recipes, and favorite recipes.
+>***recipeKey***: An integer field that connects the ingredient blurb to the corresponding recipe.
 
->***profile_id***: An auto-incrementing primary key.
+>***ingredients***: A text field that contains the full list of ingredients for the recipe.
 
->***profile_first_name***: The first name of the user.
+---
 
->***profile_last_name***: The last name of the user.
+### SimpleRecipeDirection Model
+***SimpleRecipeDirection***: This model represents a recipe direction:
 
->***allergies***: A many-to-many relationship with the Allergy model.
+>***recipeKey***: An integer field that connects the direction to the corresponding recipe.
 
->***personal_recipes***: A many-to-many relationship with the Recipe model for personal recipes.
+>***directions***: A text field that contains the full list of directions for the recipe.
 
->***favorite_recipes***: A many-to-many relationship with the Recipe model through the RecipeFavorite model for favorite recipes.
+---
 
-The Profile model also includes several ***methods*** to manage allergies, personal recipes, and favorite recipes:
+### SimpleMaster Model
+***SimpleMaster***: This model serves as a master model that consolidates all the information for a recipe:
 
->***add_allergy()***: Adds an allergy to the profile.
+>***recipeKey***: recipeKey: An integer field that serves as a unique identifier for the SimpleMaster model and establishes a connection to related models.
 
->***delete_allergy()***: Removes an allergy from the profile.
+>***recipeTitle***: A text field that contains the title of the recipe.
 
->***get_all_allergies()***: Retrieves all allergies associated with the profile.
+>***recipeIngredients***: A text field that contains the full list of ingredients for the recipe
 
->***is_allergic()***: Checks if the profile has a specific allergy.
+>***recipeDirections***: A text field that contains the full list of directions for the recipe.
 
->***delete_own_recipe()***: Removes a personal recipe from the profile.
+>***recipeNER***: A text field that contains the Named Entity Recognition (NER) processed ingredients for the recipe.
 
->***get_all_personal_recipes()***: Retrieves all personal recipes associated with the profile.
+>***recipeImage***: An optional image field that contains an image of the recipe. It is set to accept null values and can be left blank.
+---
 
->***get_all_favorite_recipes()***: Retrieves all favorite recipes associated with the profile.
+# CartBuilder: Views Documentation
 
->***has_allergy_to()***: Checks if the profile has an allergy to a specific ingredient.
+This document provides an overview of the views.py file in the CartBuilder Django web application. 
+The views handle the logic and rendering of the different pages within the application.
 
->***get_allergy_names()***: Retrieves a list of all allergy names associated with the profile.
+## Views:
+
+___
+### home View
+>Handles the logic and rendering for the home page.
+
+>Selects a random recipe from the ***SimpleMaster*** model for display in the "Food for Thought" card.
+
+>Picks a random review from a hard-coded list of reviews for display in the "Review Cards" section.
+
+>Retrieves the latest three recipes for the "Top Recipe Card" section.
+
+>Renders the home.html template with the selected recipe, review, and latest recipes.
+___
+### about View
+>Renders the ***about.html*** template for the About page.
 ___
 
-### Recipe Model
-***Recipe***: Represents a recipe, including its ingredients and any allergic ingredients.
+### recipes View
+>Retrieves all recipes from the ***SimpleMaster*** model
 
->***recipe_id***: An auto-incrementing primary key.
+>Renders the ***recipes.html*** template with the full list of recipes.
 
->***profile***: A foreign key to the Profile model.
+___
 
->***recipe_name***: The name of the recipe.
+### recipe View
 
->***date_created***: The date the recipe was created.
+>Retrieves a specific recipe from the ***SimpleMaster*** model based on the ***requestedRecipeKey*** parameter
 
->***ingredients***: A many-to-many relationship with the Ingredient model through the RecipeIngredient model.
-
->***allergic_ingredients***: A many-to-many relationship with the AllergicIngredient model.
-
->***instructions***: A many-to-many relationship with instruction model
-
->***favorite_recipes***: A many-to-many relationship with the Profile model through the RecipeFavorite model.
-
-***Methods*** for Recipe Model:
-
->***add_allergic_ingredients()***: method is used to associate allergic ingredients with a recipe.
-
->The class method ***get_popular_recipes()***: returns a list of the most popular recipes based on the number of times they appear in users' favorite recipes list.
+>Renders the ***recipe.html*** template with the selected recipe.
 
 ---
 
-### Allergy Model
-***Allergy***: Represents an allergy. It has two fields:
+### search View (search_by_ingredient)
 
->***allergy_id***: An auto-incrementing primary key.
+>Searches the ***SimpleMaster*** model for recipes containing the user's search term in the ***recipeNER*** field.
 
->***allergy_name***: The name of the allergy.
-
----
-
-### RecipeIngredient Model
-***RecipeIngredient***: Represents a many-to-many relationship between a Recipe and an Ingredient.
-It has two foreign keys fields:
-
->***recipe***: A foreign key to the Recipe model.
-
->***ingredient***: A foreign key to the Ingredient model.
-
-The model also includes two class methods:
-
->***find_recipes_with_a_certain_ingredient()***: Finds all recipes that contain the specified ingredient.
-
->***find_by_recipe()***: Retrieves all RecipeIngredient objects for a given recipe.
+>Renders the ***search.html*** template with the search results and the search query.
 
 ---
 
-### AllergicIngredient Model
-***AllergicIngredient***: Represents an ingredient that causes an allergic reaction.
-It has a single field:
+### search_by_recipe View
 
->***ingredient_name***: Stores the name of the allergic ingredient.
+>Searches the ***SimpleMaster*** model for recipes containing the user's search term in the ***recipeTitle*** field.
 
----
-
-### RecipePersonal Model
-***RecipePersonal***: Represents a many-to-many relationship between a Profile and a Recipe to store personal recipes.
-It has two foreign key fields:
-
->***profile***: A foreign key to the Profile model.
-
->***recipe***: A foreign key to the Recipe model.
+>Renders the ***search.html*** template with the search results and the search query.
 
 ---
 
-***RecipeFavorite***: Represents a many-to-many relationship between a Profile and a Recipe to store favorite recipes.
-It has three fields:
+### add_recipe View
 
->***profile***: A foreign key to the Profile model.
+>Handles the logic for adding a new recipe to the ***SimpleMaster*** model.
 
->***recipe***: A foreign key to the Recipe model.
+>When the user submits a form with the recipe information, a new instance of the ***SimpleMaster*** model is created and saved.
 
->***date_favorited***: A date-time field to store when the recipe was added to the favorites.
-
-The Meta class is used to ensure that a Profile and a Recipe can only be associated once.
-
----
-
-## Mock Tables:
+>A success message is displayed, and the user is redirected to the ***/cartbuilder*** URL. 
+ 
+>Renders the ***add_recipe.html*** template for the Add Recipe form.
 
 ---
 
-The following mock models are used to hold the data from [recipe_ingredients.csv](https://github.com/robert-daniels/CartBuilder/blob/main/CartBuilderApplication/recipe_ingredients.csv)
+### ingredients View
+>Renders the ***ingredients.html*** template for the Ingredients page.
 
 ---
 
-
-
-### MockIngredient Model
-***MockIngredient***: Simulates an Ingredient instance with a single field:
-A MockIngredient belongs to a MockRecipe, and MockRecipe can have multiple MockIngredients. 
-
->***m_ingredient_name***: The name of the mock ingredient.
+### allergies View
+>Renders the ***allergies.html*** template for the Allergies page.
 
 ---
 
-### MockRecipe
-***MockRecipe***: A mock model for simulating Recipe instances during development.
-With three fields:
-
->***m_recipe_name***: The name of the mock recipe.
-
->***m_allergic_ingredients***: A many-to-many relationship with the MockAllergicIngredient model.
-
->***m_ingredients***: A many-to-many relationship with the MockIngredient model.
-
->***m_instructions***: A many-to-many relationship with the MockInstruction model.
-
-The ***MockRecipe*** model also includes three methods:
-
->***get_mock_recipe_name()***: Retrieves the name of the mock recipe.
-
->***get_mock_allergies_for_recipe()***: Retrieves all mock allergic ingredients associated with the mock recipe.
-
->***get_mock_ingredients()***: Retrieves all mock ingredients associated with the mock recipe.
-
----
-### MockInstruction
-***MockInstruction***: A mock model for holding instruction related to recipes.
-with a single field:
-
->***m_instruction***: A single cooking instruction 
+### login View
+>Renders the ***login.html*** template for the Login page.
 
 ---
 
-### MockAllergicIngredient Model
-***MockAllergicIngredient***: A mock model for simulating AllergicIngredient instances during development.
-
->***m_ingredient_name***: Simulates a AllergicIngredient instance
-
----
-
-### TopTenMockAllergicIngredients Model
-***TopTenMockAllergicIngredients***: A model to store the top ten most common allergic ingredients.
-It has three fields:
-
->***allergic_ingredient***: The name of the allergic ingredient.
-
->***count***: The number of occurrences of the allergic ingredient.
-
->***rank***: The rank of the allergic ingredient in the top ten list.
-
-
----
-
-
+### registration View
+>Renders the ***registration.html*** template for the Login page.
 
 ## Core Contributors:
 
@@ -222,4 +161,3 @@ Yassine Ben Addi
 Robert Daniels
 
 Thomas Whitworth
-
