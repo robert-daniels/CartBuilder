@@ -2,8 +2,6 @@
 
 <style>
 
-
-
   .login-page main {
     width: 100%;
     max-width: 460px;
@@ -200,6 +198,8 @@
   .social-icons a.linkedin:hover {
     background-color: #007bb6
   }
+
+
 </style>
 
 
@@ -213,10 +213,61 @@
 
       <form class="row g-3 needs-validation" method="post">
         {% csrf_token %}
-
-        {{ register_form }}
-        <button class="btn btn-primary btn-block" type="submit">Sign up</button>
+    
+        <div class="form-group">
+            <div class="input-group">
+                <label for="validationCustom01" class="form-label"></label>
+                {{ register_form.username }} 
+            </div>
+            {% if register_form.username.errors %}
+              <div class="text-danger d-flex">
+                {{ register_form.username.errors.as_text }}
+              </div>
+            {% endif %}
+            <hr class="hr-xs">
+    
+            <div class="form-group">
+                <label for="validationCustom01" class="form-label"></label>
+                {{ register_form.email }}
+                {% if register_form.email.errors %}
+                    <div class="text-danger d-flex">
+                        {{ register_form.email.errors.as_text }}
+                    </div>
+                {% endif %}
+            </div>
+    
+            <hr class="hr-xs">
+    
+            <div class="form-group">
+                <label for="validationCustom01" class="form-label"></label>
+                {{ register_form.password1 }}
+                {% if register_form.password1.errors %}
+                    <div class="text-danger d-flex">
+                        {{ register_form.password1.errors.as_text }}
+                    </div>
+                {% endif %}
+            </div>
+    
+            <hr class="hr-xs">
+    
+            <div class="form-group">
+                <label for="validationCustom01" class="form-label"></label>
+                {{ register_form.password2 }}
+            </div>
+            {% if register_form.password2.errors %}
+                {% for error in register_form.password2.errors %}
+                  <div class="text-danger d-flex">
+                  *{{ error }}
+                  </div>
+                {% endfor %}
+            {% endif %}
+    
+            <hr class="hr-xs">
+    
+            <button class="btn btn-primary btn-block" type="submit">Sign up</button>
+    
       </form>
+
 
       <div class="login-footer">
         <h6>Or register with</h6>

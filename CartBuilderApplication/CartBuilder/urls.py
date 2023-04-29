@@ -10,8 +10,8 @@ urlpatterns = [
     path('recipes', views.recipes, name="recipes"),
     path('ingredients', views.ingredients, name="ingredients"),
     path('allergies', views.allergies, name="allergies"),
-    path('login', views.login, name='login'),
-    path('registration', views.registration, name="registration"),
+    #path('login', views.login, name='login'),
+    #path('registration', views.registration, name="registration"),
     path('recipe/<requestedRecipeKey>/', views.recipe, name="recipe"),
     path('add_recipe/', views.add_recipe, name='add_recipe'),
 ]
