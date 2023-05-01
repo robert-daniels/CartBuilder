@@ -36,4 +36,5 @@ class SimpleMaster(models.Model):
     recipeNER = models.TextField()
     recipeImage = models.ImageField(upload_to='recipe_images/', null=True, blank=True)
 
-
+    def __str__(self):
+        return self.recipeTitle

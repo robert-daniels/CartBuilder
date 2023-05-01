@@ -2,8 +2,6 @@
 
 <style>
 
-
-
   .login-page main {
     width: 100%;
     max-width: 460px;
@@ -200,6 +198,8 @@
   .social-icons a.linkedin:hover {
     background-color: #007bb6
   }
+
+
 </style>
 
 
@@ -211,57 +211,72 @@
 
       <h1>Create your account</h1>
 
-      <form class="row g-3 needs-validation" novalidate action="#" method="post">
+      <form class="row g-3 needs-validation" method="post">
         {% csrf_token %}
-
+    
         <div class="form-group">
-          <div class="input-group">
-            <label for="validationCustom01" class="form-label"></label>
-            <input type="text" class="form-control" id="validationCustom01" placeholder="First Name" name="profile_first_name" required>
-            <div class="valid-feedback">
-              Looks good!
+            <div class="input-group">
+                <label for="validationCustom01" class="form-label"></label>
+                {{ register_form.username }} 
             </div>
-        </div>
-
-        <hr class="hr-xs">
-
-        <div class="form-group">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
-            <input type="text" class="form-control" placeholder="Last name" name="profile_last_name">
-          </div>
-        </div>
-
-        <hr class="hr-xs">
-
-        <div class="form-group">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-envelope ti-email"></i></span>
-            <input type="text" class="form-control" placeholder="Your email address" name="profile_email_address" required>
-          </div>
-        </div>
-
-        <hr class="hr-xs">
-
-        <div class="form-group">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-lock ti-unlock"></i></span>
-            <input type="password" class="form-control" placeholder="Choose a password" required name="password">
-          </div>
-        </div>
-
-        <button class="btn btn-primary btn-block" type="submit">Sign up</button>
-
-        <div class="login-footer">
-          <h6>Or register with</h6>
-          <ul class="social-icons">
-            <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-            <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-            <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-          </ul>
-        </div>
-
+            {% if register_form.username.errors %}
+              <div class="text-danger d-flex">
+                {{ register_form.username.errors.as_text }}
+              </div>
+            {% endif %}
+            <hr class="hr-xs">
+    
+            <div class="form-group">
+                <label for="validationCustom01" class="form-label"></label>
+                {{ register_form.email }}
+                {% if register_form.email.errors %}
+                    <div class="text-danger d-flex">
+                        {{ register_form.email.errors.as_text }}
+                    </div>
+                {% endif %}
+            </div>
+    
+            <hr class="hr-xs">
+    
+            <div class="form-group">
+                <label for="validationCustom01" class="form-label"></label>
+                {{ register_form.password1 }}
+                {% if register_form.password1.errors %}
+                    <div class="text-danger d-flex">
+                        {{ register_form.password1.errors.as_text }}
+                    </div>
+                {% endif %}
+            </div>
+    
+            <hr class="hr-xs">
+    
+            <div class="form-group">
+                <label for="validationCustom01" class="form-label"></label>
+                {{ register_form.password2 }}
+            </div>
+            {% if register_form.password2.errors %}
+                {% for error in register_form.password2.errors %}
+                  <div class="text-danger d-flex">
+                  *{{ error }}
+                  </div>
+                {% endfor %}
+            {% endif %}
+    
+            <hr class="hr-xs">
+    
+            <button class="btn btn-primary btn-block" type="submit">Sign up</button>
+    
       </form>
+
+
+      <div class="login-footer">
+        <h6>Or register with</h6>
+        <ul class="social-icons">
+          <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+          <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+          <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+        </ul>
+      </div>
     </div>
 
     <div class="login-links">
