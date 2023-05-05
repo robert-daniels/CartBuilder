@@ -1,10 +1,20 @@
 <nav class="navbar bg-body-tertiary fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'home' %}">Recipe Box</a>
+        
+        {% if request.user.is_authenticated %}
+        <div class="d-flex">
+            <span class="navbar-text">
+                Welcome, <strong>{{ user.username }}</strong>
+            </span>
+        </div>
+        {% endif %}
+        
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
             aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Options</h5>
@@ -26,6 +36,9 @@
                     {% if request.user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Log out</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'profile' %}">My Profile</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
